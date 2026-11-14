@@ -26,7 +26,9 @@ button { cursor: pointer; }
 #ecran-script { flex-direction: column; background: var(--nuit); padding: calc(env(safe-area-inset-top) + 16px) 16px calc(env(safe-area-inset-bottom) + 16px); gap: 12px; overflow-y: auto; }
 .marque { font-weight: 800; font-size: 20px; } .marque span { color: var(--corail); }
 .ligne { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-select, #titre { background: var(--panneau); border: 1px solid var(--trait); border-radius: 12px; padding: 10px 12px; flex: 1; min-width: 0; }
+select, #titre { background: var(--panneau); border: 1px solid var(--trait); border-radius: 12px; padding: 10px 12px; min-width: 0; }
+select { flex: 1; }
+#titre { flex: none; width: 100%; }
 #texte { flex: 1; min-height: 200px; background: var(--panneau); border: 1px solid var(--trait); border-radius: 14px; padding: 14px; font-size: 17px; line-height: 1.5; resize: none; }
 .infos { color: var(--doux); font-size: 14px; }
 .reglage { display: grid; grid-template-columns: 120px 1fr 56px; gap: 10px; align-items: center; font-size: 14px; color: var(--doux); }
