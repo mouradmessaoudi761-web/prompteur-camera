@@ -73,6 +73,14 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
 #apercu { flex: 1; min-height: 0; width: 100%; background: #000; border-radius: 14px; }
 #ecran-resultat .ligne .bouton { flex: 1; }
 @media (prefers-reduced-motion: reduce) { #enregistrer span { transition: none; } }
+#rec.lourd { background: rgba(255,122,89,0.9); color: #1A0E0A; }
+#ecran-prises { flex-direction: column; background: var(--nuit); padding: calc(env(safe-area-inset-top) + 16px) 16px calc(env(safe-area-inset-bottom) + 16px); gap: 12px; overflow-y: auto; }
+.prise { background: var(--panneau); border: 1px solid var(--trait); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.prise .nom { font-weight: 700; font-size: 15px; overflow-wrap: anywhere; }
+.prise .meta { color: var(--doux); font-size: 13px; font-variant-numeric: tabular-nums; }
+.prise .meta.trop { color: var(--corail); }
+.prise .ligne .bouton { flex: 1; padding: 10px 12px; font-size: 14px; }
+.prise video { width: 100%; max-height: 40vh; background: #000; border-radius: 10px; }
 </style>
 </head>
 <body>
@@ -91,9 +99,10 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
   <div class="reglage"><label for="taille">Taille du texte</label><input type="range" id="taille" min="18" max="64" step="2"><output id="taille-v"></output></div>
   <div class="reglage"><label for="bande">Hauteur du texte</label><input type="range" id="bande" min="20" max="60" step="5"><output id="bande-v"></output></div>
   <div class="reglage"><label for="qualite">Qualité</label>
-    <select id="qualite"><option value="leger">Légère · ≈ 25 Mo par minute (pour l'envoyer à Claude)</option><option value="haute">Haute · ≈ 60 Mo par minute</option></select><output></output></div>
+    <select id="qualite"><option value="tres-legere">Très légère · ≈ 12 Mo par minute (longues vidéos, VSP)</option><option value="leger">Légère · ≈ 25 Mo par minute</option><option value="haute">Haute · ≈ 60 Mo par minute</option></select><output></output></div>
   <div class="erreur" id="erreur" role="alert"></div>
   <button class="bouton principal" id="ouvrir" type="button">🎥 Ouvrir la caméra</button>
+  <button class="bouton secondaire" id="voir-prises" type="button">📁 Mes prises</button>
 </section>
 
 <!-- 2. Se filmer en lisant -->
@@ -131,6 +140,15 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
   </div>
 </section>
 
+<!-- 4. Mes prises : toutes les vidéos enregistrées sur ce téléphone -->
+<section class="ecran" id="ecran-prises" aria-label="Mes prises">
+  <div class="ligne"><div class="marque" style="flex:1">📁 Mes prises</div>
+    <button class="bouton secondaire" id="fermer-prises" type="button">← Retour</button></div>
+  <div class="infos">Chaque prise est gardée sur ce téléphone. Pour me l'envoyer : « Enregistrer / envoyer » › « Enregistrer dans Fichiers », puis ajoute-la dans la conversation avec le trombone (moins de 30 Mo).</div>
+  <div id="liste-prises"></div>
+</section>
+
+<script src="vsp.js"></script>
 <script>
 const $ = (id) => document.getElementById(id);
 const CLE = "messacademy-prompteur-camera-v1";
@@ -145,10 +163,15 @@ if (!etat) etat = {
   scripts: TITRES.map((t, i) => ({ id: "v" + (i + 1), titre: `Vidéo ${String(i + 1).padStart(2, "0")} · ${t}`, texte: i === 0 ? EXEMPLE : "" })),
   actif: "v1", r: { vitesse: 45, taille: 30, bande: 35 },
 };
+// ajoute les scripts fournis (VSP…) s'ils ne sont pas déjà là, sans toucher à ce que tu as écrit
+(typeof SCRIPTS_VSP !== "undefined" ? SCRIPTS_VSP : []).forEach((sc) => {
+  if (!etat.scripts.some((x) => x.id === sc.id)) etat.scripts.push({ id: sc.id, titre: sc.titre, texte: sc.texte });
+});
 const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(etat)); } catch (e) {} };
 const courant = () => etat.scripts.find((s) => s.id === etat.actif) || etat.scripts[0];
 const R = etat.r;
 if (!R.qualite) R.qualite = "leger";
+if (courant().id.startsWith("vsp") && R.qualite === "leger") R.qualite = "tres-legere";
 $("qualite").value = R.qualite;
 $("qualite").addEventListener("change", (e) => { R.qualite = e.target.value; sauver(); });
 const ecran = (id) => document.querySelectorAll(".ecran").forEach((e) => e.classList.toggle("actif", e.id === id));
@@ -163,7 +186,11 @@ function infos() {
   const n = (courant().texte.trim().match(/\S+/g) || []).length; const s = Math.round(n / 150 * 60);
   $("infos").textContent = `${n} mots · environ ${s < 60 ? s + " s" : Math.floor(s / 60) + " min " + String(s % 60).padStart(2, "0")} à l'oral`;
 }
-$("choix").addEventListener("change", (e) => { etat.actif = e.target.value; sauver(); remplir(); });
+$("choix").addEventListener("change", (e) => {
+  etat.actif = e.target.value;
+  if (etat.actif.startsWith("vsp") && R.qualite !== "tres-legere") { R.qualite = "tres-legere"; $("qualite").value = R.qualite; } // VSP : prises longues
+  sauver(); remplir();
+});
 $("titre").addEventListener("input", (e) => { courant().titre = e.target.value; sauver(); });
 $("titre").addEventListener("change", remplir);
 $("texte").addEventListener("input", (e) => { courant().texte = e.target.value; sauver(); infos(); });
@@ -183,7 +210,9 @@ async function ouvrirCamera() {
   }
   try {
     flux = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "user", width: { ideal: 1080 }, height: { ideal: 1920 }, frameRate: { ideal: 30 } },
+      video: R.qualite === "tres-legere"
+        ? { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30 } }
+        : { facingMode: "user", width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 30 } },
       audio: { echoCancellation: true, noiseSuppression: true },
     });
   } catch (e) {
@@ -233,7 +262,7 @@ $("plus").addEventListener("click", () => vitesse(5));
 $("debut").addEventListener("click", () => { pauseDefile(); y = 0; dessiner(); });
 
 /* ---------- Enregistrement (le texte n'est PAS dans la vidéo) ---------- */
-let rec = null, morceaux = [], debutRec = 0, minuteur = 0, compte = 0, video = null;
+let rec = null, morceaux = [], debutRec = 0, minuteur = 0, compte = 0, video = null, octets = 0;
 const typeVideo = () => ["video/mp4;codecs=avc1,mp4a", "video/mp4", "video/webm;codecs=vp9,opus", "video/webm"].find((t) => window.MediaRecorder && MediaRecorder.isTypeSupported(t)) || "";
 function demarrerAvecDecompte() {
   let n = 3; const c = $("compte"); c.textContent = n; c.style.display = "flex";
@@ -246,13 +275,18 @@ function demarrerAvecDecompte() {
 function demarrerRec() {
   if (!window.MediaRecorder) { alert("L'enregistrement n'est pas pris en charge par ce navigateur."); return; }
   morceaux = []; const type = typeVideo();
-  const debit = R.qualite === "haute" ? 8000000 : 3000000; // 3 Mb/s ≈ 25 Mo par minute
+  const debit = { haute: 8000000, leger: 3000000, "tres-legere": 1400000 }[R.qualite] || 3000000; // 1,4 Mb/s ≈ 12 Mo par minute
   rec = new MediaRecorder(flux, type ? { mimeType: type, videoBitsPerSecond: debit, audioBitsPerSecond: 128000 } : { videoBitsPerSecond: debit });
-  rec.ondataavailable = (e) => { if (e.data && e.data.size) morceaux.push(e.data); };
+  octets = 0;
+  rec.ondataavailable = (e) => { if (e.data && e.data.size) { morceaux.push(e.data); octets += e.data.size; } };
   rec.onstop = finRec;
   rec.start(1000);
   debutRec = Date.now(); $("rec").style.display = "flex"; $("enregistrer").classList.add("en-cours");
-  minuteur = setInterval(() => { const s = Math.floor((Date.now() - debutRec) / 1000); $("rec").textContent = `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; }, 250);
+  minuteur = setInterval(() => {
+    const s = Math.floor((Date.now() - debutRec) / 1000); const mo = octets / 1e6;
+    $("rec").textContent = `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")} · ${mo.toFixed(0)} Mo`;
+    $("rec").classList.toggle("lourd", mo > 25); // bientôt 30 Mo : pense à couper
+  }, 250);
   lancerDefile();
 }
 function arreterRec() { if (rec && rec.state !== "inactive") rec.stop(); pauseDefile(); clearInterval(minuteur); $("rec").style.display = "none"; $("enregistrer").classList.remove("en-cours"); }
@@ -260,12 +294,14 @@ function finRec() {
   const type = (rec && rec.mimeType) || "video/mp4";
   const blob = new Blob(morceaux, { type });
   const ext = type.includes("mp4") ? "mp4" : "webm";
-  const nom = courant().titre.replace(/[^\p{L}\p{N} ]+/gu, "").trim().slice(0, 50) || "video";
+  const nom = courant().titre.replace(/\//g, "-").replace(/·/g, "-").replace(/[()]/g, "")
+    .replace(/[^\p{L}\p{N} '-]+/gu, "").replace(/\s+/g, " ").trim().slice(0, 60) || "video";
   video = { blob, nom: `${nom} - prise ${new Date().toLocaleTimeString("fr-FR").replace(/:/g, "h").slice(0, 5)}.${ext}`, type };
   const a = $("apercu"); a.src = URL.createObjectURL(blob);
   const mo = blob.size / 1e6;
   $("infos-video").textContent = `${mo.toFixed(1)} Mo · ${ext.toUpperCase()}` + (mo > 30 ? " · Plus de 30 Mo : coupe-la en deux dans Photos pour l'envoyer à Claude." : " · Assez légère pour l'envoyer à Claude.");
   fermerCamera(); ecran("ecran-resultat");
+  enregistrerPrise(video).then(majCompteur).catch(() => {});
 }
 $("enregistrer").addEventListener("click", () => {
   if (compte) return;
@@ -284,6 +320,71 @@ $("partager").addEventListener("click", async () => {
   const a = document.createElement("a"); a.href = URL.createObjectURL(video.blob); a.download = video.nom; document.body.appendChild(a); a.click(); a.remove();
 });
 $("refaire").addEventListener("click", ouvrirCamera);
+
+/* ---------- Mes prises (gardées sur le téléphone, dans IndexedDB) ---------- */
+function base() {
+  return new Promise((ok, ko) => {
+    const r = indexedDB.open("prompteur-prises", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("prises", { keyPath: "id" });
+    r.onsuccess = () => ok(r.result); r.onerror = () => ko(r.error);
+  });
+}
+async function enregistrerPrise(v) {
+  const db = await base();
+  await new Promise((ok, ko) => {
+    const tx = db.transaction("prises", "readwrite");
+    tx.objectStore("prises").put({ id: Date.now(), nom: v.nom, type: v.type, taille: v.blob.size, date: new Date().toISOString(), blob: v.blob });
+    tx.oncomplete = ok; tx.onerror = () => ko(tx.error);
+  });
+}
+async function toutesLesPrises() {
+  const db = await base();
+  return new Promise((ok, ko) => {
+    const r = db.transaction("prises").objectStore("prises").getAll();
+    r.onsuccess = () => ok(r.result.sort((a, b) => b.id - a.id)); r.onerror = () => ko(r.error);
+  });
+}
+async function supprimerPrise(id) {
+  const db = await base();
+  await new Promise((ok) => { const tx = db.transaction("prises", "readwrite"); tx.objectStore("prises").delete(id); tx.oncomplete = ok; });
+}
+async function envoyer(p) {
+  const fichier = new File([p.blob], p.nom, { type: p.type });
+  if (navigator.canShare && navigator.canShare({ files: [fichier] })) {
+    try { await navigator.share({ files: [fichier], title: p.nom }); return; } catch (e) { if (e.name === "AbortError") return; }
+  }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(p.blob); a.download = p.nom; document.body.appendChild(a); a.click(); a.remove();
+}
+async function afficherPrises() {
+  const zone = $("liste-prises"); zone.innerHTML = "";
+  let prises = [];
+  try { prises = await toutesLesPrises(); } catch (e) { zone.textContent = "Impossible de lire les prises sur ce navigateur."; return; }
+  if (!prises.length) { zone.innerHTML = '<div class="infos">Aucune prise pour l\'instant. Tes vidéos apparaîtront ici après chaque enregistrement.</div>'; return; }
+  prises.forEach((p) => {
+    const d = document.createElement("div"); d.className = "prise";
+    const nom = document.createElement("div"); nom.className = "nom"; nom.textContent = p.nom;
+    const mo = p.taille / 1e6;
+    const meta = document.createElement("div"); meta.className = "meta" + (mo > 30 ? " trop" : "");
+    meta.textContent = `${new Date(p.date).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" })} · ${mo.toFixed(1)} Mo` + (mo > 30 ? " · trop lourde pour Claude : coupe-la en deux dans Photos" : "");
+    const lecteur = document.createElement("video"); lecteur.controls = true; lecteur.playsInline = true; lecteur.preload = "metadata";
+    lecteur.src = URL.createObjectURL(p.blob);
+    const l = document.createElement("div"); l.className = "ligne";
+    const b1 = document.createElement("button"); b1.type = "button"; b1.className = "bouton principal"; b1.textContent = "Enregistrer / envoyer";
+    b1.addEventListener("click", () => envoyer(p));
+    const b2 = document.createElement("button"); b2.type = "button"; b2.className = "bouton secondaire"; b2.textContent = "Supprimer";
+    b2.addEventListener("click", async () => {
+      if (b2.dataset.ok) { await supprimerPrise(p.id); afficherPrises(); majCompteur(); }
+      else { b2.dataset.ok = "1"; b2.textContent = "Confirmer la suppression"; }
+    });
+    l.append(b1, b2); d.append(nom, meta, lecteur, l); zone.appendChild(d);
+  });
+}
+async function majCompteur() {
+  try { const n = (await toutesLesPrises()).length; $("voir-prises").textContent = `📁 Mes prises (${n})`; } catch (e) {}
+}
+$("voir-prises").addEventListener("click", () => { ecran("ecran-prises"); afficherPrises(); });
+$("fermer-prises").addEventListener("click", () => ecran("ecran-script"));
+majCompteur();
 $("vers-script").addEventListener("click", () => ecran("ecran-script"));
 
 remplir();
