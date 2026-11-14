@@ -41,6 +41,9 @@ input[type="range"] { accent-color: var(--corail); }
 #ecran-studio { flex-direction: column; }
 #prompteur { height: 26vh; min-height: 140px; overflow-y: auto; padding: 14px 6vw; background: #000; border-bottom: 2px solid var(--trait);
   font-size: clamp(22px, 2.6vw, 38px); line-height: 1.4; font-weight: 700; white-space: pre-wrap; scroll-behavior: auto; }
+#prompteur .lu { color: #6E7196; }
+#prompteur .ici { color: var(--corail); }
+#etat-voix { font-size: 13px; color: var(--doux); min-width: 150px; }
 #prompteur .etiquette { display: block; font-size: 13px; letter-spacing: 0.14em; color: var(--corail); font-weight: 800; margin-bottom: 6px; }
 #scene { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 10px; position: relative; }
 #toile { max-width: 100%; max-height: 100%; aspect-ratio: 16 / 9; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); background: #111325; }
@@ -122,8 +125,15 @@ input[type="range"] { accent-color: var(--corail); }
     <button id="enregistrer" type="button" aria-label="Démarrer ou arrêter l'enregistrement"><span></span></button>
     <span class="separe"></span>
     <div class="groupe">
-      <label class="infos" for="vitesse">Défilement du texte</label>
-      <input type="range" id="vitesse" min="0" max="80" value="0" aria-label="Vitesse de défilement du texte">
+      <label class="infos" for="mode-texte">Texte</label>
+      <select id="mode-texte" aria-label="Défilement du texte">
+        <option value="voix">Suit ma voix</option>
+        <option value="parole">Avance quand je parle</option>
+        <option value="auto">Défilement continu</option>
+        <option value="manuel">Manuel</option>
+      </select>
+      <input type="range" id="vitesse" min="10" max="80" value="30" aria-label="Vitesse de défilement du texte">
+      <span id="etat-voix"></span>
       <button class="petit" id="retour" type="button">✕ Quitter</button>
     </div>
   </div>
@@ -202,6 +212,9 @@ async function ouvrir() {
   } catch (e) { return erreur("La caméra ou le micro sont refusés. Autorise-les dans Chrome (icône à gauche de l'adresse), puis réessaie."); }
   videoCam.srcObject = cam; await videoCam.play();
   i = 0; precedente = 0; changement = 0; majDiapo();
+  preparerAnalyse();
+  $("vitesse").hidden = true;
+  if ($("mode-texte").value === "voix") demarrerReco();
   ecran("ecran-studio"); boucle();
 }
 $("ouvrir").addEventListener("click", ouvrir);
@@ -267,8 +280,15 @@ function majDiapo() {
   const p = $("prompteur"); p.innerHTML = "";
   const e = document.createElement("span"); e.className = "etiquette"; e.textContent = `DIAPO ${i + 1} · TON TEXTE (visible par toi seul)`;
   const t = document.createElement("div");
-  t.textContent = diapos[i] && diapos[i].notes ? diapos[i].notes : "Pas de texte pour cette diapo : parle librement.";
-  p.append(e, t); p.scrollTop = 0; posTexte = 0;
+  const texte = diapos[i] && diapos[i].notes ? diapos[i].notes : "Pas de texte pour cette diapo : parle librement.";
+  mots = [];
+  // espaces insécables avant : ? ! » et après « (typographie française : pas de ponctuation seule en début de ligne)
+  texte.replace(/ ([:?!»])/g, "\u00a0$1").replace(/« /g, "«\u00a0").split(/([ \t\n]+)/).forEach((morceau) => {
+    if (!morceau.trim()) { t.appendChild(document.createTextNode(morceau)); return; }
+    const sp = document.createElement("span"); sp.textContent = morceau; t.appendChild(sp);
+    mots.push({ el: sp, n: normal(morceau) });
+  });
+  p.append(e, t); p.scrollTop = 0; posTexte = 0; curseur = 0; cible = 0;
 }
 function aller(n) {
   if (n < 0 || n >= diapos.length || n === i) return;
@@ -276,13 +296,83 @@ function aller(n) {
 }
 $("prec").addEventListener("click", () => aller(i - 1));
 $("suiv").addEventListener("click", () => aller(i + 1));
-let posTexte = 0, dernierT = 0;
+let posTexte = 0, dernierT = 0, mots = [], curseur = 0, cible = 0;
+const normal = (m) => m.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]/g, "");
 function defilerTexte() {
-  const v = Number($("vitesse").value); const t = performance.now();
-  const dt = dernierT ? (t - dernierT) / 1000 : 0; dernierT = t;
-  if (v > 0) { posTexte += v * dt; $("prompteur").scrollTop = posTexte; }
+  const mode = $("mode-texte").value, v = Number($("vitesse").value), p = $("prompteur");
+  const t = performance.now(); const dt = dernierT ? (t - dernierT) / 1000 : 0; dernierT = t;
+  if (mode === "auto" || (mode === "parole" && parle()) || (mode === "voix" && !reco && parle())) {
+    posTexte += v * dt; p.scrollTop = posTexte;
+  } else if (mode === "voix" && reco && mots.length) {
+    // le mot que tu viens de lire reste au tiers du cadre ; on y glisse en douceur
+    const m = mots[Math.min(curseur, mots.length - 1)].el;
+    cible = Math.max(0, m.offsetTop - p.offsetTop - p.clientHeight * 0.33);
+    posTexte += (cible - posTexte) * Math.min(1, dt * 4); p.scrollTop = posTexte;
+  }
 }
 $("prompteur").addEventListener("wheel", () => { posTexte = $("prompteur").scrollTop; }, { passive: true });
+
+/* ---------- Détection de la voix (volume du micro) ---------- */
+let analyseur = null, donnees = null, niveauFond = 0.01, derniereParole = 0;
+function preparerAnalyse() {
+  try {
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ac.createMediaStreamSource(micro); analyseur = ac.createAnalyser(); analyseur.fftSize = 1024;
+    src.connect(analyseur); donnees = new Float32Array(analyseur.fftSize);
+  } catch (e) { analyseur = null; }
+}
+function parle() {
+  if (!analyseur) return true;
+  analyseur.getFloatTimeDomainData(donnees);
+  let s = 0; for (const x of donnees) s += x * x; const rms = Math.sqrt(s / donnees.length);
+  // bruit de fond qui s'adapte : descend vite vers les silences, remonte lentement
+  niveauFond = rms < niveauFond ? niveauFond * 0.9 + rms * 0.1 : niveauFond * 1.0005;
+  if (rms > Math.max(0.012, niveauFond * 3)) derniereParole = performance.now();
+  return performance.now() - derniereParole < 350; // continue 0,35 s après la fin d'un mot
+}
+
+/* ---------- Reconnaissance de la parole : le texte suit ce que tu lis ---------- */
+let reco = null, recoActive = false;
+function demarrerReco() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { $("etat-voix").textContent = "Reconnaissance indisponible : le texte avance quand tu parles"; return; }
+  reco = new SR(); reco.lang = "fr-FR"; reco.continuous = true; reco.interimResults = true;
+  reco.onresult = (e) => {
+    let dit = "";
+    for (let k = e.resultIndex; k < e.results.length; k++) dit += " " + e.results[k][0].transcript;
+    suivre(dit.split(/\s+/).map(normal).filter(Boolean));
+  };
+  reco.onerror = (e) => {
+    if (e.error === "not-allowed" || e.error === "service-not-allowed") { reco = null; $("etat-voix").textContent = "Reconnaissance refusée : le texte avance quand tu parles"; }
+  };
+  reco.onend = () => { if (recoActive && reco) { try { reco.start(); } catch (e) {} } }; // Chrome coupe après un silence : on relance
+  recoActive = true;
+  try { reco.start(); $("etat-voix").textContent = "🎙 Je suis ta voix"; } catch (e) {}
+}
+function arreterReco() { recoActive = false; if (reco) { try { reco.stop(); } catch (e) {} } }
+function suivre(entendus) {
+  if (!entendus.length || !mots.length) return;
+  // cherche les derniers mots entendus un peu plus loin dans le texte (jamais en arrière de plus de 3 mots)
+  const fin = entendus.slice(-3);
+  let meilleur = -1, score = 0;
+  for (let j = Math.max(0, curseur - 3); j < Math.min(mots.length, curseur + 40); j++) {
+    let sc = 0;
+    for (let k = 0; k < fin.length; k++) {
+      const m = mots[j - (fin.length - 1 - k)];
+      if (m && (m.n === fin[k] || (fin[k].length > 3 && m.n.startsWith(fin[k].slice(0, 4))))) sc++;
+    }
+    if (sc > score || (sc === score && sc > 0 && j < meilleur)) { score = sc; meilleur = j; }
+  }
+  if (meilleur >= 0 && score >= Math.min(2, fin.length)) {
+    curseur = Math.max(curseur, meilleur + 1);
+    mots.forEach((m, k) => { m.el.className = k < curseur ? "lu" : (k === curseur ? "ici" : ""); });
+  }
+}
+$("mode-texte").addEventListener("change", () => {
+  const m = $("mode-texte").value;
+  $("vitesse").hidden = m === "voix" || m === "manuel";
+  if (m === "voix") demarrerReco(); else { arreterReco(); $("etat-voix").textContent = m === "parole" ? "Avance quand tu parles" : ""; }
+});
 document.addEventListener("keydown", (e) => {
   if (!$("ecran-studio").classList.contains("actif")) return;
   if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); aller(i + 1); }   // aussi les télécommandes de présentation
@@ -344,6 +434,7 @@ $("telecharger").addEventListener("click", () => {
 $("refaire").addEventListener("click", () => { i = 0; precedente = 0; majDiapo(); ecran("ecran-studio"); });
 $("retour").addEventListener("click", () => {
   if (rec && rec.state === "recording") return;
+  arreterReco();
   [cam, micro, ecranPartage].forEach((s) => s && s.getTracks().forEach((t) => t.stop()));
   ecran("ecran-prepa");
 });

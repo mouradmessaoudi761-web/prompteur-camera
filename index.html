@@ -100,6 +100,8 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
   <div class="reglage"><label for="bande">Hauteur du texte</label><input type="range" id="bande" min="20" max="60" step="5"><output id="bande-v"></output></div>
   <div class="reglage"><label for="qualite">Qualité</label>
     <select id="qualite"><option value="tres-legere">Très légère · ≈ 12 Mo par minute (longues vidéos, VSP)</option><option value="leger">Légère · ≈ 25 Mo par minute</option><option value="haute">Haute · ≈ 60 Mo par minute</option></select><output></output></div>
+  <label class="reglage" for="suit-voix" style="grid-template-columns:auto 1fr;color:var(--texte)">
+    <input type="checkbox" id="suit-voix" style="accent-color:var(--corail);width:22px;height:22px"> Le texte s'arrête quand je me tais</label>
   <div class="erreur" id="erreur" role="alert"></div>
   <button class="bouton principal" id="ouvrir" type="button">🎥 Ouvrir la caméra</button>
   <button class="bouton secondaire" id="voir-prises" type="button">📁 Mes prises</button>
@@ -180,6 +182,9 @@ if (!R.qualite) R.qualite = "leger";
 if (courant().id.startsWith("vsp") && R.qualite === "leger") R.qualite = "tres-legere";
 $("qualite").value = R.qualite;
 $("qualite").addEventListener("change", (e) => { R.qualite = e.target.value; sauver(); });
+if (R.suitVoix === undefined) R.suitVoix = true;
+$("suit-voix").checked = R.suitVoix;
+$("suit-voix").addEventListener("change", (e) => { R.suitVoix = e.target.checked; sauver(); });
 const ecran = (id) => document.querySelectorAll(".ecran").forEach((e) => e.classList.toggle("actif", e.id === id));
 
 /* ---------- Scripts ---------- */
@@ -225,7 +230,25 @@ async function ouvrirCamera() {
     return erreur("La caméra ou le micro sont refusés. Autorise-les quand le navigateur te le demande (sur iPhone : Réglages › Safari › Caméra et Micro), puis réessaie.");
   }
   $("camera").srcObject = flux;
+  preparerAnalyse();
   preparerTexte(); ecran("ecran-tournage");
+}
+/* ---------- Détection de la voix : le texte avance quand tu parles, s'arrête quand tu te tais ---------- */
+let analyseur = null, donnees = null, niveauFond = 0.01, derniereParole = 0;
+function preparerAnalyse() {
+  try {
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ac.createMediaStreamSource(flux); analyseur = ac.createAnalyser(); analyseur.fftSize = 1024;
+    src.connect(analyseur); donnees = new Float32Array(analyseur.fftSize);
+  } catch (e) { analyseur = null; }
+}
+function parle() {
+  if (!analyseur || !R.suitVoix) return true;
+  analyseur.getFloatTimeDomainData(donnees);
+  let s = 0; for (const x of donnees) s += x * x; const rms = Math.sqrt(s / donnees.length);
+  niveauFond = rms < niveauFond ? niveauFond * 0.9 + rms * 0.1 : niveauFond * 1.0005;
+  if (rms > Math.max(0.012, niveauFond * 3)) derniereParole = performance.now();
+  return performance.now() - derniereParole < 350;
 }
 function erreur(t) { const e = $("erreur"); e.textContent = t; e.style.display = "block"; }
 function fermerCamera() { if (flux) flux.getTracks().forEach((t) => t.stop()); flux = null; }
@@ -251,7 +274,7 @@ function dessiner() { $("defile").style.transform = `translateY(${-y}px)`; }
 function boucle(t) {
   if (!defileActif) return;
   const dt = dernier ? (t - dernier) / 1000 : 0; dernier = t;
-  y += R.vitesse * dt * (R.taille / 30);
+  if (parle()) y += R.vitesse * dt * (R.taille / 30);
   const d = $("defile"); const max = d.scrollHeight - parseFloat(d.style.paddingTop) - parseFloat(d.style.paddingBottom);
   if (y >= max) { y = max; defileActif = false; }
   dessiner(); raf = requestAnimationFrame(boucle);
