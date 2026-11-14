@@ -153,7 +153,7 @@ input[type="range"] { accent-color: var(--corail); }
 <script>
 const $ = (id) => document.getElementById(id);
 const ecran = (id) => document.querySelectorAll(".ecran").forEach((e) => e.classList.toggle("actif", e.id === id));
-const C = { fond: "#111325", corail: "#FF7A59" };
+const C = { fond: "#F4F4F7", corail: "#FF7A59" }; // fond clair, assorti aux diapos blanches
 
 let diapos = [];      // [{img: HTMLImageElement, notes: string}]
 let ecranPartage = null, videoEcran = null;
