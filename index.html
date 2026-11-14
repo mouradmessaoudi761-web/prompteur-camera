@@ -164,8 +164,13 @@ if (!etat) etat = {
   actif: "v1", r: { vitesse: 45, taille: 30, bande: 35 },
 };
 // ajoute les scripts fournis (VSP…) s'ils ne sont pas déjà là, sans toucher à ce que tu as écrit
+// … et remplace une ancienne version d'un script fourni par la nouvelle (ex. VSP 6 réécrite)
+if (!etat.versions) etat.versions = {};
 (typeof SCRIPTS_VSP !== "undefined" ? SCRIPTS_VSP : []).forEach((sc) => {
-  if (!etat.scripts.some((x) => x.id === sc.id)) etat.scripts.push({ id: sc.id, titre: sc.titre, texte: sc.texte });
+  const deja = etat.scripts.find((x) => x.id === sc.id);
+  if (!deja) etat.scripts.push({ id: sc.id, titre: sc.titre, texte: sc.texte });
+  else if ((sc.version || 1) > (etat.versions[sc.id] || 1)) { deja.titre = sc.titre; deja.texte = sc.texte; }
+  etat.versions[sc.id] = sc.version || 1;
 });
 const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(etat)); } catch (e) {} };
 const courant = () => etat.scripts.find((s) => s.id === etat.actif) || etat.scripts[0];

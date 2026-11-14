@@ -108,25 +108,24 @@ Parce que quand j'étais dans cet entrepôt, j'aurais aimé que quelqu'un me mon
 
 Aujourd'hui, c'est ce que je veux faire pour toi.` },
 
-{ id: "vsp6", titre: "VSP 6/8 · Les preuves", texte:
-`Je ne vais pas te promettre des chiffres magiques. Ce que je peux te montrer, ce sont des choses réelles.
+{ id: "vsp6", version: 2, titre: "VSP 6/8 · Les preuves", texte:
+`Je ne vais pas te promettre des chiffres magiques. Je préfère te montrer comment ça se passe, concrètement.
 
-[À COMPLÉTER AVEC TON CLIENT, avec ses vrais mots :
-Avant : qui il ou elle était, son travail, ce qui bloquait.
-Le déclic : ce qu'il ou elle a compris en travaillant avec toi.
-Après : son résultat concret aujourd'hui.]
+Regarde ces conversations. Ce sont de vraies conversations de setting.
 
-Je vais aussi te montrer de vraies conversations de setting.
+[Pendant que tu parles, on affiche 2 ou 3 captures de TES conversations, avec les noms cachés.]
 
-[Pendant que tu parles, on affichera 2 ou 3 captures de conversations, avec les noms cachés.]
+Un premier message, simple. Une question pour comprendre la personne. Un échange naturel, sans forcer. Et au bout, un rendez-vous calé.
 
-Regarde comment ça se passe concrètement. Un message. Une question. Un échange naturel. Et un rendez-vous calé.
+Pas besoin d'être un génie de la vente. Il faut juste savoir écouter, poser les bonnes questions, et suivre une méthode. C'est exactement ce que tu vas apprendre.
 
-C'est exactement ce que tu vas apprendre à faire.
+Et la demande est là. Les coachs et les entrepreneurs qui vendent sur Instagram ont besoin de setters, parce qu'ils n'ont pas le temps de répondre à tous leurs messages.
 
-Et puis il y a mon propre parcours. L'entrepôt, le chantier. Et aujourd'hui, la liberté de travailler d'où je veux.
+[Facultatif : si tu as un message d'un coach ou d'un apporteur d'affaires qui cherche des setters, on l'affiche ici, nom caché.]
 
-Ce que je t'enseigne, je le vis tous les jours.` },
+Et puis il y a mon propre parcours. L'entrepôt, le chantier. Et aujourd'hui, la liberté de travailler d'où je veux, avec mon téléphone.
+
+Ce que je t'enseigne, je ne l'ai pas lu dans un livre. Je le fais tous les jours.` },
 
 { id: "vsp7", titre: "VSP 7/8 · Tes questions avant l'appel", texte:
 `Avant notre appel, je veux répondre aux questions que tout le monde se pose.
