@@ -1,0 +1,23 @@
+PROMPTEUR CAMÉRA MESSACADEMY
+Tu te filmes et ton texte défile en haut de l'écran, près de la caméra.
+Le texte n'apparaît PAS dans la vidéo enregistrée.
+
+=== SUR TON iPHONE (une seule fois, 5 minutes) ===
+La caméra du téléphone ne s'ouvre que depuis un lien sécurisé (https). On met donc la page en ligne gratuitement :
+1. Sur ton Mac, va sur  app.netlify.com/drop  et crée un compte gratuit.
+2. Glisse le DOSSIER « prompteur-camera » dans la zone indiquée sur la page.
+3. Netlify te donne un lien (https://...netlify.app). Envoie-le sur ton iPhone.
+4. Ouvre-le dans Safari, puis Partager › « Sur l'écran d'accueil » : tu as une icône comme une appli.
+
+=== SUR TON MAC (sans rien mettre en ligne) ===
+Fais un clic droit sur index.html › Ouvrir avec › Google Chrome.
+
+=== POUR TOURNER ===
+1. Choisis la vidéo, colle ton script, règle la vitesse et la taille.
+2. « Ouvrir la caméra » et autorise la caméra et le micro.
+3. Gros bouton rouge : décompte 3-2-1, puis l'enregistrement et le défilement démarrent ensemble.
+4. Touche l'écran pour mettre le texte en pause. Glisse du doigt pour revenir en arrière. Les boutons − et + changent la vitesse.
+5. Bouton rouge pour arrêter, puis « Enregistrer la vidéo » › « Enregistrer la vidéo » (elle va dans Photos).
+
+Astuces : téléphone à hauteur des yeux, face à une fenêtre. Mets « Hauteur du texte » assez bas pour que tes yeux restent près de l'objectif.
+Tes scripts restent enregistrés sur l'appareil où tu les colles.
