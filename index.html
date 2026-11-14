@@ -90,6 +90,8 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
   <div class="reglage"><label for="vitesse">Vitesse</label><input type="range" id="vitesse" min="10" max="150" step="5"><output id="vitesse-v"></output></div>
   <div class="reglage"><label for="taille">Taille du texte</label><input type="range" id="taille" min="18" max="64" step="2"><output id="taille-v"></output></div>
   <div class="reglage"><label for="bande">Hauteur du texte</label><input type="range" id="bande" min="20" max="60" step="5"><output id="bande-v"></output></div>
+  <div class="reglage"><label for="qualite">Qualité</label>
+    <select id="qualite"><option value="leger">Légère · ≈ 25 Mo par minute (pour l'envoyer à Claude)</option><option value="haute">Haute · ≈ 60 Mo par minute</option></select><output></output></div>
   <div class="erreur" id="erreur" role="alert"></div>
   <button class="bouton principal" id="ouvrir" type="button">🎥 Ouvrir la caméra</button>
 </section>
@@ -146,6 +148,9 @@ if (!etat) etat = {
 const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(etat)); } catch (e) {} };
 const courant = () => etat.scripts.find((s) => s.id === etat.actif) || etat.scripts[0];
 const R = etat.r;
+if (!R.qualite) R.qualite = "leger";
+$("qualite").value = R.qualite;
+$("qualite").addEventListener("change", (e) => { R.qualite = e.target.value; sauver(); });
 const ecran = (id) => document.querySelectorAll(".ecran").forEach((e) => e.classList.toggle("actif", e.id === id));
 
 /* ---------- Scripts ---------- */
@@ -241,7 +246,8 @@ function demarrerAvecDecompte() {
 function demarrerRec() {
   if (!window.MediaRecorder) { alert("L'enregistrement n'est pas pris en charge par ce navigateur."); return; }
   morceaux = []; const type = typeVideo();
-  rec = new MediaRecorder(flux, type ? { mimeType: type, videoBitsPerSecond: 8000000 } : undefined);
+  const debit = R.qualite === "haute" ? 8000000 : 3000000; // 3 Mb/s ≈ 25 Mo par minute
+  rec = new MediaRecorder(flux, type ? { mimeType: type, videoBitsPerSecond: debit, audioBitsPerSecond: 128000 } : { videoBitsPerSecond: debit });
   rec.ondataavailable = (e) => { if (e.data && e.data.size) morceaux.push(e.data); };
   rec.onstop = finRec;
   rec.start(1000);
@@ -257,7 +263,8 @@ function finRec() {
   const nom = courant().titre.replace(/[^\p{L}\p{N} ]+/gu, "").trim().slice(0, 50) || "video";
   video = { blob, nom: `${nom} - prise ${new Date().toLocaleTimeString("fr-FR").replace(/:/g, "h").slice(0, 5)}.${ext}`, type };
   const a = $("apercu"); a.src = URL.createObjectURL(blob);
-  $("infos-video").textContent = `${(blob.size / 1e6).toFixed(1)} Mo · ${ext.toUpperCase()}`;
+  const mo = blob.size / 1e6;
+  $("infos-video").textContent = `${mo.toFixed(1)} Mo · ${ext.toUpperCase()}` + (mo > 30 ? " · Plus de 30 Mo : coupe-la en deux dans Photos pour l'envoyer à Claude." : " · Assez légère pour l'envoyer à Claude.");
   fermerCamera(); ecran("ecran-resultat");
 }
 $("enregistrer").addEventListener("click", () => {
