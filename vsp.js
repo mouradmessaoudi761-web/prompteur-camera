@@ -1,9 +1,9 @@
-// Script de la VSP (vidéo de pré-vente), découpé en 8 parties d'environ 2 minutes maximum.
-// Une partie = une prise : chaque fichier reste sous les 30 Mo en qualité « très légère ».
-// Structure du guide VSP : accroche, miroir, vrai problème + mécanisme (mot-clé), parcours,
-// preuve sociale, objections, projection + CTA. Mot-clé : LIBERTÉ (fin de la partie 4, vers 7 min).
+// Script de la VSP, découpé en 7 parties (une partie = une prise, sous les 30 Mo en qualité très légère).
+// Mêmes textes que les diapos du studio (vsp-diapos/notes.json). Mot-clé : LIBERTÉ (partie 4).
+// La partie « questions / objections » a été retirée : elles sont traitées pendant l'appel.
+const SCRIPTS_RETIRES = ["vsp7"];
 const SCRIPTS_VSP = [
-{ id: "vsp1", version: 3, titre: "VSP 1/8 · Accroche et règle du mot-clé", texte:
+{ id: "vsp1", version: 4, titre: "VSP 1/7 · Accroche et règle du mot-clé", texte:
 `Salut à toi !
 
 Si tu regardes cette vidéo aujourd'hui, c'est que tu as réservé un appel avec moi.
@@ -22,7 +22,7 @@ Je ne suis pas strict pour le plaisir, hein. C'est juste que si tu ne peux pas p
 
 Alors installe-toi tranquillement.` },
 
-{ id: "vsp2", version: 3, titre: "VSP 2/8 · Le miroir", texte:
+{ id: "vsp2", version: 4, titre: "VSP 2/7 · Le miroir", texte:
 `Je vais te décrire une situation. Dis-moi si tu te reconnais.
 
 Tu te lèves le matin pour un travail qui ne te ressemble même pas. Tu fais tes heures, tu rentres sans énergie, et à la fin du mois, il ne te reste pas grand-chose.
@@ -49,7 +49,7 @@ Le vrai problème, ce n'est pas ton manque de motivation. Ce n'est pas ton âge,
 
 Le vrai problème, il est ailleurs. Et c'est ce que je vais te montrer maintenant.` },
 
-{ id: "vsp3", version: 3, titre: "VSP 3/8 · Le vrai problème", texte:
+{ id: "vsp3", version: 4, titre: "VSP 3/7 · Le vrai problème", texte:
 `Aujourd'hui, la plupart des gens échangent leur temps contre de l'argent. Une heure de travail, un salaire.
 
 Le problème, c'est que ton temps est limité. Tu ne peux pas travailler vingt-cinq heures par jour.
@@ -84,7 +84,7 @@ Le setter, c'est la personne qui répond à ces messages, qui comprend le besoin
 
 Un téléphone, du réseau. Et c'est tout.` },
 
-{ id: "vsp4", version: 3, titre: "VSP 4/8 · Ma méthode (mot-clé)", texte:
+{ id: "vsp4", version: 4, titre: "VSP 4/7 · Ma méthode (mot-clé)", texte:
 `Maintenant, concrètement, comment je t'accompagne ?
 
 On travaille ensemble pendant quatre mois. Et mon accompagnement repose justement sur les trois pièces du puzzle.
@@ -105,7 +105,7 @@ Retiens bien ce mot : LIBERTÉ.
 
 C'est le mot-clé que tu dois m'envoyer avant notre appel.` },
 
-{ id: "vsp5", version: 3, titre: "VSP 5/8 · Qui je suis", texte:
+{ id: "vsp5", version: 4, titre: "VSP 5/7 · Qui je suis", texte:
 `Tu te demandes peut-être qui je suis pour te parler de tout ça.
 
 Il n'y a pas si longtemps, j'étais exactement à ta place. Je travaillais dans un entrepôt, je portais des sacs toute la journée. J'ai fait des chantiers. Je partais le matin, je rentrais le soir, et le lendemain, je recommençais.
@@ -116,7 +116,7 @@ Je ne voulais plus travailler pour un patron. Je voulais travailler de là où j
 
 J'ai appris à parler aux gens par message, à comprendre ce qu'ils voulaient vraiment, et j'ai commencé à caler des rendez-vous. Et là, je me suis dit : en fait, ça s'apprend.` },
 
-{ id: "vsp6", version: 3, titre: "VSP 6/8 · Les preuves", texte:
+{ id: "vsp6", version: 4, titre: "VSP 6/7 · Les preuves", texte:
 `Je ne vais pas te promettre des chiffres magiques. Je préfère te montrer comment ça se passe, concrètement.
 
 Parce que ce que je te transmets, c'est une compétence. Et une compétence, tu la gardes à vie.
@@ -127,20 +127,7 @@ Un message simple et personnalisé. Une question pour comprendre la personne. Un
 
 C'est aussi simple que ça.` },
 
-{ id: "vsp7", version: 3, titre: "VSP 7/8 · Tes questions avant l'appel", texte:
-`Avant notre appel, je veux répondre aux questions que tout le monde se pose.
-
-« Je n'ai jamais vendu de ma vie. » C'est normal, et c'est même plutôt une bonne chose. Le setting, ce n'est pas forcer quelqu'un à acheter. C'est écouter, poser les bonnes questions, et aider la personne à y voir clair. Ça s'apprend, et je suis là pour te l'apprendre.
-
-« Je n'ai pas le temps. » Je comprends, tu as peut-être déjà un travail, une famille. Justement : le setting se fait depuis ton téléphone. Le soir, le week-end, pendant ta pause. Tu avances à ton rythme, et on adapte ensemble.
-
-« J'ai peur de m'engager. » C'est une vraie question. Je vais être honnête : je ne sais pas encore si c'est fait pour toi. Et c'est exactement à ça que sert notre appel. On va regarder ta situation et tes objectifs, et on verra ensemble si ça a du sens. Si ce n'est pas le cas, je te le dirai.
-
-« Ça doit coûter cher. » Pose-toi plutôt la question à l'envers : combien ça te coûte de rester dans ta situation encore un an ? Les mêmes horaires, la même fatigue, le même mur à la fin du mois. On parlera de l'investissement pendant l'appel, en toute transparence.
-
-« Est-ce que c'est une arnaque ? » Tu as raison de te méfier, il y en a beaucoup. Ici, pas de promesse de devenir riche en un mois. Le setting, c'est un vrai métier, avec du travail et de la régularité. Et pendant quatre mois, tu n'es pas seul : on se voit deux fois par semaine.` },
-
-{ id: "vsp8", version: 3, titre: "VSP 8/8 · Ta vie dans 6 mois et le mot-clé", texte:
+{ id: "vsp8", version: 4, titre: "VSP 7/7 · Ta vie dans 6 mois et conclusion", texte:
 `Maintenant, prends deux secondes.
 
 Imagine-toi dans six mois. Tu te réveilles, et tu n'as plus cette boule au ventre en pensant à ta journée.
@@ -151,11 +138,11 @@ Et surtout, tu as retrouvé du temps. Pour toi, pour tes proches, pour ces proje
 
 C'est ça, la vraie liberté. Pas juste l'argent : le choix. Tu ne dépends de personne d'autre que de toi.
 
-Alors voilà ce que tu fais maintenant. Une seule chose : envoie-moi le mot-clé en message, avant notre appel. Tu l'as entendu tout à l'heure.
+Bon, écoute, maintenant on se retrouve en appel.
 
-Sans mot-clé, pas d'appel.
+Juste avant, n'oublie pas : envoie-moi le mot-clé en message. Tu l'as entendu tout à l'heure. Sans mot-clé, pas d'appel.
 
-Avec le mot-clé, on se voit très vite, et on regarde ensemble comment construire ta liberté.
+J'ai hâte d'échanger avec toi.
 
-À très vite !` },
+À très vite !` }
 ];

@@ -169,6 +169,11 @@ if (!etat) etat = {
 // ajoute les scripts fournis (VSP…) s'ils ne sont pas déjà là, sans toucher à ce que tu as écrit
 // … et remplace une ancienne version d'un script fourni par la nouvelle (ex. VSP 6 réécrite)
 if (!etat.versions) etat.versions = {};
+// retire les scripts fournis qui n'existent plus (ex. l'ancienne partie « questions »)
+(typeof SCRIPTS_RETIRES !== "undefined" ? SCRIPTS_RETIRES : []).forEach((id) => {
+  etat.scripts = etat.scripts.filter((x) => x.id !== id);
+  if (etat.actif === id) etat.actif = etat.scripts[0].id;
+});
 (typeof SCRIPTS_VSP !== "undefined" ? SCRIPTS_VSP : []).forEach((sc) => {
   const deja = etat.scripts.find((x) => x.id === sc.id);
   if (!deja) etat.scripts.push({ id: sc.id, titre: sc.titre, texte: sc.texte });
