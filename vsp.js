@@ -1,9 +1,9 @@
-// Script de la VSP, découpé en 7 parties (une partie = une prise, sous les 30 Mo en qualité très légère).
+// Script de la VSP, découpé en 6 parties (une partie = une prise, sous les 30 Mo en qualité très légère).
 // Mêmes textes que les diapos du studio (vsp-diapos/notes.json). Mot-clé : LIBERTÉ (partie 4).
-// La partie « questions / objections » a été retirée : elles sont traitées pendant l'appel.
-const SCRIPTS_RETIRES = ["vsp7"];
+// Parties retirées : « preuves » et « questions / objections » (traitées pendant l'appel).
+const SCRIPTS_RETIRES = ["vsp6", "vsp7"];
 const SCRIPTS_VSP = [
-{ id: "vsp1", version: 4, titre: "VSP 1/7 · Accroche et règle du mot-clé", texte:
+{ id: "vsp1", version: 5, titre: "VSP 1/6 · Accroche et règle du mot-clé", texte:
 `Salut à toi !
 
 Si tu regardes cette vidéo aujourd'hui, c'est que tu as réservé un appel avec moi.
@@ -22,7 +22,7 @@ Je ne suis pas strict pour le plaisir, hein. C'est juste que si tu ne peux pas p
 
 Alors installe-toi tranquillement.` },
 
-{ id: "vsp2", version: 4, titre: "VSP 2/7 · Le miroir", texte:
+{ id: "vsp2", version: 5, titre: "VSP 2/6 · Le miroir", texte:
 `Je vais te décrire une situation. Dis-moi si tu te reconnais.
 
 Tu te lèves le matin pour un travail qui ne te ressemble même pas. Tu fais tes heures, tu rentres sans énergie, et à la fin du mois, il ne te reste pas grand-chose.
@@ -49,7 +49,7 @@ Le vrai problème, ce n'est pas ton manque de motivation. Ce n'est pas ton âge,
 
 Le vrai problème, il est ailleurs. Et c'est ce que je vais te montrer maintenant.` },
 
-{ id: "vsp3", version: 4, titre: "VSP 3/7 · Le vrai problème", texte:
+{ id: "vsp3", version: 5, titre: "VSP 3/6 · Le vrai problème", texte:
 `Aujourd'hui, la plupart des gens échangent leur temps contre de l'argent. Une heure de travail, un salaire.
 
 Le problème, c'est que ton temps est limité. Tu ne peux pas travailler vingt-cinq heures par jour.
@@ -84,7 +84,7 @@ Le setter, c'est la personne qui répond à ces messages, qui comprend le besoin
 
 Un téléphone, du réseau. Et c'est tout.` },
 
-{ id: "vsp4", version: 4, titre: "VSP 4/7 · Ma méthode (mot-clé)", texte:
+{ id: "vsp4", version: 5, titre: "VSP 4/6 · Ma méthode (mot-clé)", texte:
 `Maintenant, concrètement, comment je t'accompagne ?
 
 On travaille ensemble pendant quatre mois. Et mon accompagnement repose justement sur les trois pièces du puzzle.
@@ -105,7 +105,7 @@ Retiens bien ce mot : LIBERTÉ.
 
 C'est le mot-clé que tu dois m'envoyer avant notre appel.` },
 
-{ id: "vsp5", version: 4, titre: "VSP 5/7 · Qui je suis", texte:
+{ id: "vsp5", version: 5, titre: "VSP 5/6 · Qui je suis", texte:
 `Tu te demandes peut-être qui je suis pour te parler de tout ça.
 
 Il n'y a pas si longtemps, j'étais exactement à ta place. Je travaillais dans un entrepôt, je portais des sacs toute la journée. J'ai fait des chantiers. Je partais le matin, je rentrais le soir, et le lendemain, je recommençais.
@@ -116,18 +116,7 @@ Je ne voulais plus travailler pour un patron. Je voulais travailler de là où j
 
 J'ai appris à parler aux gens par message, à comprendre ce qu'ils voulaient vraiment, et j'ai commencé à caler des rendez-vous. Et là, je me suis dit : en fait, ça s'apprend.` },
 
-{ id: "vsp6", version: 4, titre: "VSP 6/7 · Les preuves", texte:
-`Je ne vais pas te promettre des chiffres magiques. Je préfère te montrer comment ça se passe, concrètement.
-
-Parce que ce que je te transmets, c'est une compétence. Et une compétence, tu la gardes à vie.
-
-Regarde : ce sont de vraies conversations de setting.
-
-Un message simple et personnalisé. Une question pour comprendre la personne. Un échange naturel, sans forcer. Et au bout, un rendez-vous calé dans l'agenda.
-
-C'est aussi simple que ça.` },
-
-{ id: "vsp8", version: 4, titre: "VSP 7/7 · Ta vie dans 6 mois et conclusion", texte:
+{ id: "vsp8", version: 5, titre: "VSP 6/6 · Ta vie dans 6 mois et conclusion", texte:
 `Maintenant, prends deux secondes.
 
 Imagine-toi dans six mois. Tu te réveilles, et tu n'as plus cette boule au ventre en pensant à ta journée.
