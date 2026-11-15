@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avant notre appel · Messacademy</title>
+<meta name="description" content="Regarde cette vidéo avant notre appel : elle prépare notre échange.">
+<meta property="og:title" content="Avant notre appel · Messacademy">
+<meta property="og:description" content="Regarde cette vidéo en entier avant notre appel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Une page pour le prospect : ville la nuit en ouverture, la vidéo au centre, puis le déroulé de l'appel. */
+  --nuit: #0B0D1C;
+  --nuit-2: #141731;
+  --trait: #262A4D;
+  --texte: #F4F2F8;
+  --doux: #A6A9C8;
+  --corail: #FF7A59;
+  --titre: "Archivo Black", "Arial Black", sans-serif;
+  --corps: "Manrope", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--nuit); color: var(--texte); font-family: var(--corps); }
+a { color: var(--corail); }
+:focus-visible { outline: 3px solid var(--corail); outline-offset: 3px; }
+
+/* ---------- Ouverture : la ville la nuit ---------- */
+.ouverture { position: relative; min-height: 64vh; display: flex; align-items: flex-end; overflow: hidden;
+  padding: calc(env(safe-area-inset-top) + 40px) 20px 56px; }
+#ville { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ouverture::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(11,13,28,0) 40%, var(--nuit) 98%); pointer-events: none; }
+.ouverture .contenu { position: relative; z-index: 1; width: min(880px, 100%); margin: 0 auto; }
+.marque { font-weight: 800; letter-spacing: 0.28em; font-size: 13px; color: var(--corail); }
+h1 { font-family: var(--titre); font-weight: 400; font-size: clamp(40px, 8vw, 84px); line-height: 0.98; margin: 14px 0 16px; text-wrap: balance; }
+.chapeau { font-size: clamp(17px, 2.2vw, 21px); line-height: 1.5; color: #D9DAEA; max-width: 34em; margin: 0; }
+
+/* ---------- Vidéo ---------- */
+main { width: min(880px, 100%); margin: 0 auto; padding: 0 20px 64px; display: flex; flex-direction: column; gap: 56px; }
+.video { margin-top: -28px; position: relative; z-index: 2; }
+.cadre-video { aspect-ratio: 16 / 9; width: 100%; border-radius: 18px; overflow: hidden; background: var(--nuit-2);
+  border: 1px solid var(--trait); box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,122,89,0.12); }
+.cadre-video iframe, .cadre-video video { width: 100%; height: 100%; border: 0; display: block; background: #000; }
+.bientot { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; color: var(--doux); }
+.bientot b { color: var(--texte); font-size: 20px; }
+.consigne { display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; padding: 16px 18px; border-radius: 14px;
+  background: rgba(255,122,89,0.08); border: 1px solid rgba(255,122,89,0.35); font-size: 16px; line-height: 1.5; }
+.consigne .pastille { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--corail); color: #1A0E0A;
+  display: flex; align-items: center; justify-content: center; font-weight: 800; }
+
+/* ---------- Déroulé de l'appel ---------- */
+h2 { font-family: var(--titre); font-weight: 400; font-size: clamp(26px, 4vw, 38px); line-height: 1.1; margin: 0 0 22px; text-wrap: balance; }
+.etapes { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.etapes li { display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: start; padding: 20px; border-radius: 16px;
+  background: var(--nuit-2); border: 1px solid var(--trait); }
+.etapes .num { font-family: var(--titre); font-size: 34px; line-height: 1; color: var(--corail); }
+.etapes h3 { margin: 2px 0 6px; font-size: 19px; font-weight: 800; }
+.etapes p { margin: 0; color: var(--doux); line-height: 1.55; font-size: 16px; }
+
+.avant { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.avant li { display: flex; gap: 12px; align-items: center; font-size: 17px; line-height: 1.45; }
+.avant li::before { content: "✓"; flex: none; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--corail);
+  color: var(--corail); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+footer { border-top: 1px solid var(--trait); padding: 24px 20px calc(env(safe-area-inset-bottom) + 28px); text-align: center; color: var(--doux); font-size: 14px; }
+footer .marque { display: block; margin-bottom: 6px; }
+@media (prefers-reduced-motion: reduce) { #ville { animation: none; } }
+</style>
+</head>
+<body>
+
+<header class="ouverture">
+  <canvas id="ville" aria-hidden="true"></canvas>
+  <div class="contenu">
+    <div class="marque">MESSACADEMY</div>
+    <h1>Avant notre appel</h1>
+    <p class="chapeau">Tu as réservé ton appel, bravo. Regarde cette vidéo en entier : elle t'explique le métier, ma méthode, et elle prépare notre échange.</p>
+  </div>
+</header>
+
+<main>
+  <section class="video" aria-label="La vidéo">
+    <div class="cadre-video" id="cadre-video"></div>
+    <div class="consigne"><span class="pastille">!</span>
+      <div>Un <b>mot-clé</b> est caché dans la vidéo. Envoie-le-moi en message <b>avant notre appel</b> : sans mot-clé, l'appel est annulé.</div>
+    </div>
+  </section>
+
+  <section aria-labelledby="titre-appel">
+    <h2 id="titre-appel">Comment va se passer notre appel</h2>
+    <ol class="etapes">
+      <li><span class="num">01</span><div><h3>On fait le point sur ta situation</h3>
+        <p>Où tu en es aujourd'hui, ce que tu veux changer, et le temps que tu peux y consacrer.</p></div></li>
+      <li><span class="num">02</span><div><h3>Je réponds à tes questions</h3>
+        <p>Sur le métier de setter, sur ma méthode et sur l'accompagnement. Tu repars avec une vision claire.</p></div></li>
+      <li><span class="num">03</span><div><h3>On décide ensemble</h3>
+        <p>On regarde si c'est fait pour toi, sans pression. Si ce n'est pas le cas, je te le dirai honnêtement.</p></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="titre-avant">
+    <h2 id="titre-avant">Avant l'appel</h2>
+    <ul class="avant">
+      <li>Regarde la vidéo en entier, avec des écouteurs</li>
+      <li>Envoie-moi le mot-clé en message</li>
+      <li>Installe-toi dans un endroit calme pour l'appel</li>
+    </ul>
+  </section>
+</main>
+
+<footer><span class="marque">MESSACADEMY</span>Hâte d'échanger avec toi.</footer>
+
+<script>
+/* ---------- La vidéo : colle ici le lien YouTube (non répertoriée) ou le nom d'un fichier vidéo ---------- */
+const VIDEO = { youtube: "", fichier: "" };
+
+(function afficherVideo() {
+  const cadre = document.getElementById("cadre-video");
+  const id = (VIDEO.youtube.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/) || [])[1];
+  if (id) {
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
+    f.title = "Avant notre appel"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+    cadre.appendChild(f);
+  } else if (VIDEO.fichier) {
+    const v = document.createElement("video");
+    v.src = VIDEO.fichier; v.controls = true; v.playsInline = true; v.preload = "metadata";
+    cadre.appendChild(v);
+  } else {
+    cadre.innerHTML = '<div class="bientot"><b>La vidéo arrive très bientôt</b><span>Reviens sur cette page un peu plus tard.</span></div>';
+  }
+})();
+
+/* ---------- Ville la nuit (dessinée, aucune image externe) ---------- */
+(function ville() {
+  const c = document.getElementById("ville"), ctx = c.getContext("2d");
+  let graine = 7; const hasard = () => ((graine = (graine * 16807) % 2147483647) / 2147483647);
+  function dessiner() {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const W = c.clientWidth, H = c.clientHeight; c.width = W * dpr; c.height = H * dpr; ctx.scale(dpr, dpr);
+    graine = 7;
+    // ciel : nuit profonde, halo corail à l'horizon
+    const ciel = ctx.createLinearGradient(0, 0, 0, H);
+    ciel.addColorStop(0, "#05060F"); ciel.addColorStop(0.55, "#121634"); ciel.addColorStop(0.85, "#3A2238"); ciel.addColorStop(1, "#5A2A2E");
+    ctx.fillStyle = ciel; ctx.fillRect(0, 0, W, H);
+    const halo = ctx.createRadialGradient(W * 0.62, H * 0.95, 10, W * 0.62, H * 0.95, W * 0.6);
+    halo.addColorStop(0, "rgba(255,122,89,0.38)"); halo.addColorStop(1, "rgba(255,122,89,0)");
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+    // étoiles
+    for (let k = 0; k < 120; k++) { ctx.fillStyle = `rgba(255,255,255,${0.15 + hasard() * 0.5})`; ctx.fillRect(hasard() * W, hasard() * H * 0.5, 1.2, 1.2); }
+    // trois rangées d'immeubles, de la plus lointaine à la plus proche
+    [[0.42, "#151935", 0.10, 40], [0.58, "#0E1128", 0.16, 60], [0.78, "#080A1A", 0.24, 90]].forEach(([haut, couleur, fen, larg]) => {
+      let x = -10;
+      while (x < W + 10) {
+        const w = larg * (0.5 + hasard()), h = H * haut * (0.35 + hasard() * 0.65), y = H - h;
+        ctx.fillStyle = couleur; ctx.fillRect(x, y, w, h);
+        if (hasard() > 0.7) { ctx.fillRect(x + w * 0.42, y - h * 0.12, w * 0.16, h * 0.12); } // antenne / flèche
+        for (let fy = y + 8; fy < H - 6; fy += 9) for (let fx = x + 5; fx < x + w - 5; fx += 7)
+          if (hasard() < fen) { ctx.fillStyle = hasard() < 0.25 ? "rgba(255,150,110,0.85)" : "rgba(255,220,170,0.7)"; ctx.fillRect(fx, fy, 3, 4); ctx.fillStyle = couleur; }
+        x += w + 2 + hasard() * 6;
+      }
+    });
+    // brume légère au pied des immeubles
+    const brume = ctx.createLinearGradient(0, H * 0.7, 0, H);
+    brume.addColorStop(0, "rgba(11,13,28,0)"); brume.addColorStop(1, "rgba(11,13,28,0.7)");
+    ctx.fillStyle = brume; ctx.fillRect(0, H * 0.7, W, H * 0.3);
+  }
+  dessiner(); addEventListener("resize", () => { ctx.setTransform(1, 0, 0, 1, 0, 0); dessiner(); });
+})();
+</script>
+</body>
+</html>
