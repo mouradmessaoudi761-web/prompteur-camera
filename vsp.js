@@ -3,162 +3,159 @@
 // Structure du guide VSP : accroche, miroir, vrai problème + mécanisme (mot-clé), parcours,
 // preuve sociale, objections, projection + CTA. Mot-clé : LIBERTÉ (fin de la partie 4, vers 7 min).
 const SCRIPTS_VSP = [
-{ id: "vsp1", titre: "VSP 1/8 · Accroche et règle du mot-clé", texte:
-`Si tu regardes cette vidéo, c'est que tu as réservé un appel avec moi.
+{ id: "vsp1", version: 3, titre: "VSP 1/8 · Accroche et règle du mot-clé", texte:
+`Salut à toi !
 
-Et franchement, bravo. La plupart des gens rêvent de changer de vie, mais très peu passent vraiment à l'action. Toi, tu viens de le faire.
+Si tu regardes cette vidéo aujourd'hui, c'est que tu as réservé un appel avec moi.
 
-Dans les prochaines minutes, je vais t'expliquer pourquoi tu stagnes aujourd'hui, comment fonctionne le métier de setter, et comment je t'accompagne si on décide de travailler ensemble.
+Et franchement, bravo. Parce que la plupart des gens rêvent de changer de vie, mais très peu passent vraiment à l'action.
 
-Avant de commencer, une règle importante.
+Toi, tu l'as fait. Et je suis vraiment fier de toi.
 
-J'ai caché un mot-clé quelque part dans cette vidéo. Tu ne sais pas à quel moment il va arriver.
+Avant d'aller plus loin, il y a une règle importante, pour qu'on avance hyper vite.
 
-Avant notre appel, tu devras me l'envoyer en message. Si je ne le reçois pas, l'appel est annulé.
+Il y a un mot-clé caché quelque part dans cette vidéo. C'est fait exprès : tu ne sais pas à quel moment il va arriver.
 
-Pas parce que je suis strict pour le plaisir. Mais parce que si tu ne peux pas prendre un quart d'heure pour regarder cette vidéo, tu ne pourras pas faire ce qu'il faut pour réussir.
+Avant notre appel, tu devras juste me l'envoyer en message. Si je ne le reçois pas, l'appel est annulé.
 
-Alors installe-toi tranquillement, mets tes écouteurs, et on y va.` },
+Je ne suis pas strict pour le plaisir, hein. C'est juste que si tu ne peux pas prendre un quart d'heure pour regarder cette vidéo, tu ne pourras pas faire ce qu'il faut pour réussir.
 
-{ id: "vsp2", titre: "VSP 2/8 · Le miroir", texte:
+Alors installe-toi tranquillement.` },
+
+{ id: "vsp2", version: 3, titre: "VSP 2/8 · Le miroir", texte:
 `Je vais te décrire une situation. Dis-moi si tu te reconnais.
 
-Tu te lèves le matin pour un travail qui ne te ressemble pas. Tu fais tes heures, tu rentres sans énergie, et à la fin du mois, il ne reste pas grand-chose.
+Tu te lèves le matin pour un travail qui ne te ressemble même pas. Tu fais tes heures, tu rentres sans énergie, et à la fin du mois, il ne te reste pas grand-chose.
 
-Tu sens que tu vaux plus que ça. Tu as envie de changer. Peut-être une reconversion. Peut-être juste un complément de revenu, pour respirer un peu.
+Et franchement, c'est le cas de la plupart des gens.
 
-Alors tu as cherché. Tu as regardé des vidéos sur internet. On t'a parlé de dropshipping, de crypto, d'immobilier, de trading.
+Tu sens que tu vaux plus que ça. Tu as envie de changer. Peut-être une reconversion, peut-être juste un complément de revenu, pour respirer un peu.
 
-Et à chaque fois, la même chose : il faut de l'argent pour commencer, ou des années pour apprendre. Ou alors, ça sent l'arnaque à plein nez.
+Mais au fond, tu sais que tu n'es pas à ta place. Et si tu te reconnais là-dedans, c'est déjà un bon signe.
 
-Et petit à petit, tu commences à te dire que ce n'est peut-être pas pour toi. Que les gens qui travaillent avec leur téléphone, qui voyagent, qui choisissent leurs horaires, ils ont eu de la chance. Ou qu'ils avaient déjà de l'argent au départ.
+Alors tu as cherché. Tu as regardé des vidéos sur Internet.
 
-Si tu te reconnais, même un peu, je veux que tu saches une chose : tu n'es pas le problème.
+On t'a parlé de dropshipping, de crypto, d'immobilier, de trading… On t'a parlé de plein de choses.
+
+Et à chaque fois, c'est la même chose : il faut de l'argent pour commencer, ou des années pour apprendre. Ou alors, tu sens que ça sent l'arnaque.
+
+Et petit à petit, tu commences à te dire que ce n'est peut-être pas pour toi. Que les gens qui travaillent avec leur téléphone, qui voyagent, qui choisissent leurs horaires, ils ont juste de la chance. Ou qu'ils mentent. Ou qu'ils avaient déjà de l'argent au départ.
+
+En fait, tu te trouves des excuses.
+
+Ce que je veux que tu comprennes, c'est que tu n'es pas le problème.
 
 Le vrai problème, ce n'est pas ton manque de motivation. Ce n'est pas ton âge, ni ton diplôme.
 
-Le vrai problème est ailleurs. Et c'est ce que je vais te montrer maintenant.` },
+Le vrai problème, il est ailleurs. Et c'est ce que je vais te montrer maintenant.` },
 
-{ id: "vsp3", titre: "VSP 3/8 · Le vrai problème", texte:
+{ id: "vsp3", version: 3, titre: "VSP 3/8 · Le vrai problème", texte:
 `Aujourd'hui, la plupart des gens échangent leur temps contre de l'argent. Une heure de travail, un salaire.
 
-Le problème, c'est que ton temps est limité. Tu ne peux pas travailler vingt-cinq heures par jour. Donc tes revenus sont bloqués. Et ta liberté aussi.
+Le problème, c'est que ton temps est limité. Tu ne peux pas travailler vingt-cinq heures par jour.
+
+Donc tes revenus seront toujours bloqués. Et ta liberté aussi.
+
+Et c'est ça qui est frustrant.
 
 Pour en sortir, il te faut trois choses.
 
 Un : une compétence qui a de la valeur, et que tu peux exercer depuis ton téléphone.
 
-Deux : quelqu'un qui te forme et qui te suit, pour ne pas abandonner au bout de deux semaines.
+Deux : un suivi. Quelqu'un qui te forme et qui te suit, pour que tu n'abandonnes pas.
 
-Trois : tes premières opportunités. Des gens qui ont besoin de toi, et qui sont prêts à te payer.
+Trois : des opportunités. Des gens qui ont besoin de toi, et qui sont prêts à te payer.
 
-Et c'est là que ça coince. Les formations que tu trouves sur internet te donnent, au mieux, la première partie. Des vidéos, et puis débrouille-toi.
+Ça, ce sont les trois pièces du puzzle.
+
+Alors pourquoi ça n'a pas marché jusqu'ici ? C'est là que ça coince.
+
+Les formations que tu trouves sur Internet te donnent, au mieux, la première pièce. Et après, on te dit : débrouille-toi.
 
 Personne pour te corriger. Personne pour te pousser quand tu doutes. Et surtout, personne pour t'ouvrir les portes.
 
-Donc si ça n'a pas marché pour toi jusqu'ici, ce n'est pas de ta faute. On t'a donné une pièce du puzzle, alors qu'il en fallait trois.
+Donc si ça n'a pas marché pour toi, ce n'est pas de ta faute. On t'a donné une pièce du puzzle, alors qu'il en fallait trois.
 
 La compétence dont je te parle, c'est le setting.
 
-Les coachs, les formateurs, les entrepreneurs qui vendent sur Instagram reçoivent énormément de messages. Ils n'ont pas le temps de tous les gérer.
+Les coachs, les formateurs, les entrepreneurs qui vendent sur Instagram reçoivent énormément de messages. Ils n'ont pas le temps de tout gérer.
 
 Le setter, c'est la personne qui répond à ces messages, qui comprend le besoin de chaque prospect, et qui lui cale un rendez-vous.
 
 Un téléphone, du réseau. Et c'est tout.` },
 
-{ id: "vsp4", titre: "VSP 4/8 · Ma méthode (mot-clé)", texte:
+{ id: "vsp4", version: 3, titre: "VSP 4/8 · Ma méthode (mot-clé)", texte:
 `Maintenant, concrètement, comment je t'accompagne ?
 
 On travaille ensemble pendant quatre mois. Et mon accompagnement repose justement sur les trois pièces du puzzle.
 
-Première pièce : la compétence. Je t'apprends le setting, étape par étape. Comment démarrer une conversation, comment comprendre le besoin d'une personne, comment caler un rendez-vous sans jamais forcer.
+Première pièce : la compétence. Je t'apprends le setting étape par étape. Comment démarrer une conversation, comment comprendre le besoin d'une personne, comment caler un rendez-vous sans jamais forcer. C'est cette compétence qui a tout changé pour moi, et c'est elle que je vais te transmettre.
 
 Deuxième pièce : le suivi. On se voit deux fois par semaine en coaching. On regarde tes conversations ensemble, je te corrige, je réponds à tes questions. Tu n'es jamais seul face à ton téléphone.
 
-Troisième pièce, et c'est celle qui fait la différence : le réseau. Je te mets en relation avec mon réseau d'apporteurs d'affaires, pour t'aider à trouver tes premières missions auprès d'entrepreneurs qui cherchent des setters.
+Troisième pièce, et c'est celle qui fait la différence : le réseau. Je te mets en relation avec mon réseau d'apporteurs d'affaires, pour t'aider à trouver tes premières missions auprès d'entrepreneurs qui cherchent des setters. C'est ça, la force.
 
-Prends un exemple. Imagine quelqu'un qui démarre seul, avec une formation en vidéo. Il apprend la théorie, mais il ne sait pas où trouver sa première mission. Personne ne relit ses messages. Au bout d'un mois, il lâche.
+Prends un exemple. Quelqu'un qui démarre seul, avec une formation en vidéo : il apprend la théorie, mais il ne sait pas où trouver sa première mission. Personne ne relit ses messages, et au bout d'un mois, il lâche.
 
 Avec les trois pièces, c'est différent. Tu sais quoi faire, tu es corrigé chaque semaine, et des portes s'ouvrent pour démarrer.
 
-Compétence, suivi, réseau. Ces trois pièces ensemble, c'est ce que j'appelle la méthode LIBERTÉ.
+Compétence, suivi, réseau : c'est ce que j'appelle la méthode LIBERTÉ.
 
-Retiens bien ce mot : LIBERTÉ. C'est le mot-clé que tu devras m'envoyer avant notre appel.` },
+Retiens bien ce mot : LIBERTÉ.
 
-{ id: "vsp5", titre: "VSP 5/8 · Qui je suis", texte:
+C'est le mot-clé que tu dois m'envoyer avant notre appel.` },
+
+{ id: "vsp5", version: 3, titre: "VSP 5/8 · Qui je suis", texte:
 `Tu te demandes peut-être qui je suis pour te parler de tout ça.
 
-Il n'y a pas si longtemps, j'étais exactement à ta place.
+Il n'y a pas si longtemps, j'étais exactement à ta place. Je travaillais dans un entrepôt, je portais des sacs toute la journée. J'ai fait des chantiers. Je partais le matin, je rentrais le soir, et le lendemain, je recommençais.
 
-Je travaillais dans un entrepôt, à porter des sacs toute la journée. J'ai fait des chantiers. Je partais le matin dans le froid, je rentrais le soir, et je recommençais le lendemain.
+À côté, je voyageais énormément. J'ai même vécu aux États-Unis. Et à chaque fois, je tombais sur le même problème : l'argent. C'était mon mur.
 
-Je n'avais jamais de temps pour moi. Je faisais les choses sans vraiment savoir où j'allais.
+Je ne voulais plus travailler pour un patron. Je voulais travailler de là où je veux. Alors j'ai commencé le setting.
 
-Mon rêve, c'était de voyager. Mais à chaque fois, il y avait le même mur : l'argent.
+J'ai appris à parler aux gens par message, à comprendre ce qu'ils voulaient vraiment, et j'ai commencé à caler des rendez-vous. Et là, je me suis dit : en fait, ça s'apprend.` },
 
-Et puis un jour, j'ai découvert le setting. J'ai appris à parler aux gens par message, à comprendre ce qu'ils voulaient vraiment, à caler des rendez-vous.
-
-Aujourd'hui, je travaille avec mon téléphone. Mes revenus dépendent de mes résultats, pas d'un patron.
-
-Et j'ai pu réaliser ce rêve que je repoussais depuis des années : j'ai voyagé, de Bali jusqu'à Los Angeles.
-
-Pourquoi je fais cet accompagnement ?
-
-Parce que quand j'étais dans cet entrepôt, j'aurais aimé que quelqu'un me montre le chemin. Quelqu'un qui me dise : c'est possible, et voilà comment.
-
-Aujourd'hui, c'est ce que je veux faire pour toi.` },
-
-{ id: "vsp6", version: 2, titre: "VSP 6/8 · Les preuves", texte:
+{ id: "vsp6", version: 3, titre: "VSP 6/8 · Les preuves", texte:
 `Je ne vais pas te promettre des chiffres magiques. Je préfère te montrer comment ça se passe, concrètement.
 
-Regarde ces conversations. Ce sont de vraies conversations de setting.
+Parce que ce que je te transmets, c'est une compétence. Et une compétence, tu la gardes à vie.
 
-[Pendant que tu parles, on affiche 2 ou 3 captures de TES conversations, avec les noms cachés.]
+Regarde : ce sont de vraies conversations de setting.
 
-Un premier message, simple. Une question pour comprendre la personne. Un échange naturel, sans forcer. Et au bout, un rendez-vous calé.
+Un message simple et personnalisé. Une question pour comprendre la personne. Un échange naturel, sans forcer. Et au bout, un rendez-vous calé dans l'agenda.
 
-Pas besoin d'être un génie de la vente. Il faut juste savoir écouter, poser les bonnes questions, et suivre une méthode. C'est exactement ce que tu vas apprendre.
+C'est aussi simple que ça.` },
 
-Et la demande est là. Les coachs et les entrepreneurs qui vendent sur Instagram ont besoin de setters, parce qu'ils n'ont pas le temps de répondre à tous leurs messages.
-
-[Facultatif : si tu as un message d'un coach ou d'un apporteur d'affaires qui cherche des setters, on l'affiche ici, nom caché.]
-
-Et puis il y a mon propre parcours. L'entrepôt, le chantier. Et aujourd'hui, la liberté de travailler d'où je veux, avec mon téléphone.
-
-Ce que je t'enseigne, je ne l'ai pas lu dans un livre. Je le fais tous les jours.` },
-
-{ id: "vsp7", titre: "VSP 7/8 · Tes questions avant l'appel", texte:
+{ id: "vsp7", version: 3, titre: "VSP 7/8 · Tes questions avant l'appel", texte:
 `Avant notre appel, je veux répondre aux questions que tout le monde se pose.
 
-« Je n'ai jamais vendu de ma vie. »
-C'est normal. Et c'est même plutôt une bonne chose. Le setting, ce n'est pas forcer quelqu'un à acheter. C'est écouter, poser les bonnes questions, et aider la personne à y voir clair. Ça s'apprend. Et je suis là pour te l'apprendre.
+« Je n'ai jamais vendu de ma vie. » C'est normal, et c'est même plutôt une bonne chose. Le setting, ce n'est pas forcer quelqu'un à acheter. C'est écouter, poser les bonnes questions, et aider la personne à y voir clair. Ça s'apprend, et je suis là pour te l'apprendre.
 
-« Je n'ai pas le temps. »
-Je comprends. Tu as peut-être déjà un travail, une famille. Justement : le setting se fait depuis ton téléphone, à tes horaires. Le soir, le week-end, pendant ta pause. Tu avances à ton rythme, et on adapte ensemble.
+« Je n'ai pas le temps. » Je comprends, tu as peut-être déjà un travail, une famille. Justement : le setting se fait depuis ton téléphone. Le soir, le week-end, pendant ta pause. Tu avances à ton rythme, et on adapte ensemble.
 
-« J'ai peur de m'engager. Et si ça ne marche pas pour moi ? »
-C'est une vraie question, et je vais être honnête : je ne sais pas encore si c'est fait pour toi. C'est exactement à ça que sert notre appel. On va regarder ta situation et tes objectifs, et on verra ensemble si ça a du sens. Si ce n'est pas le cas, je te le dirai.
+« J'ai peur de m'engager. » C'est une vraie question. Je vais être honnête : je ne sais pas encore si c'est fait pour toi. Et c'est exactement à ça que sert notre appel. On va regarder ta situation et tes objectifs, et on verra ensemble si ça a du sens. Si ce n'est pas le cas, je te le dirai.
 
-« Ça doit coûter cher. »
-Pose-toi plutôt la question à l'envers : combien ça te coûte de rester dans ta situation actuelle encore un an ? Les mêmes horaires, la même fatigue, le même mur à la fin du mois. On parlera de l'investissement pendant l'appel, en toute transparence.
+« Ça doit coûter cher. » Pose-toi plutôt la question à l'envers : combien ça te coûte de rester dans ta situation encore un an ? Les mêmes horaires, la même fatigue, le même mur à la fin du mois. On parlera de l'investissement pendant l'appel, en toute transparence.
 
-« Est-ce que c'est une arnaque ? »
-Tu as raison de te méfier, il y en a beaucoup. Ici, pas de promesse de devenir riche en un mois. Le setting, c'est un vrai métier, avec du travail et de la régularité. Et pendant quatre mois, tu n'es pas seul : on se voit deux fois par semaine.` },
+« Est-ce que c'est une arnaque ? » Tu as raison de te méfier, il y en a beaucoup. Ici, pas de promesse de devenir riche en un mois. Le setting, c'est un vrai métier, avec du travail et de la régularité. Et pendant quatre mois, tu n'es pas seul : on se voit deux fois par semaine.` },
 
-{ id: "vsp8", titre: "VSP 8/8 · Ta vie dans 6 mois et le mot-clé", texte:
+{ id: "vsp8", version: 3, titre: "VSP 8/8 · Ta vie dans 6 mois et le mot-clé", texte:
 `Maintenant, prends deux secondes.
 
 Imagine-toi dans six mois. Tu te réveilles, et tu n'as plus cette boule au ventre en pensant à ta journée.
 
-Tu ouvres ton téléphone, tu réponds à tes conversations, tu cales tes rendez-vous. Tu sais ce que tu fais, et tu sais pourquoi tu le fais.
+Tu ouvres ton téléphone, tu réponds à tes conversations, tu cales des rendez-vous. Tu sais ce que tu fais, et tu sais pourquoi tu le fais.
 
-Et surtout, tu as retrouvé du temps. Du temps pour toi, pour tes proches, pour ces projets que tu repousses depuis trop longtemps.
+Et surtout, tu as retrouvé du temps. Pour toi, pour tes proches, pour ces projets que tu repousses depuis trop longtemps.
 
-C'est ça, la vraie liberté. Pas juste l'argent. Le choix.
+C'est ça, la vraie liberté. Pas juste l'argent : le choix. Tu ne dépends de personne d'autre que de toi.
 
 Alors voilà ce que tu fais maintenant. Une seule chose : envoie-moi le mot-clé en message, avant notre appel. Tu l'as entendu tout à l'heure.
 
-Sans mot-clé, pas d'appel. Avec le mot-clé, on se voit très vite, et on regarde ensemble comment construire ta liberté.
+Sans mot-clé, pas d'appel.
 
-À très vite.` },
+Avec le mot-clé, on se voit très vite, et on regarde ensemble comment construire ta liberté.
+
+À très vite !` },
 ];

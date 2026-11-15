@@ -39,12 +39,20 @@ input[type="range"] { accent-color: var(--corail); }
 
 /* ---------- 2. Studio ---------- */
 #ecran-studio { flex-direction: column; }
-#prompteur { height: 26vh; min-height: 140px; overflow-y: auto; padding: 14px 6vw; background: #000; border-bottom: 2px solid var(--trait);
-  font-size: clamp(22px, 2.6vw, 38px); line-height: 1.4; font-weight: 700; white-space: pre-wrap; scroll-behavior: auto; }
+/* petit cadre de lecture, juste sous la caméra du Mac : tes yeux restent près de l'objectif */
+#cadre { position: fixed; top: 6px; left: 50%; translate: -50% 0; width: 440px; height: 190px; min-width: 240px; min-height: 100px;
+  resize: both; overflow: hidden; z-index: 20; display: flex; flex-direction: column;
+  background: rgba(8, 9, 20, 0.9); border: 1px solid var(--trait); border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.45); }
+#poignee { display: flex; align-items: center; gap: 6px; padding: 4px 8px; cursor: move; user-select: none;
+  font-size: 12px; color: var(--doux); border-bottom: 1px solid var(--trait); }
+#poignee span { flex: 1; }
+#poignee button { background: transparent; border: 1px solid var(--trait); border-radius: 6px; padding: 1px 8px; font-size: 12px; }
+#prompteur { flex: 1; min-height: 0; overflow-y: auto; padding: 8px 14px 60px; font-size: var(--taille-texte, 22px);
+  line-height: 1.4; font-weight: 700; white-space: pre-wrap; scroll-behavior: auto; }
 #prompteur .lu { color: #6E7196; }
 #prompteur .ici { color: var(--corail); }
 #etat-voix { font-size: 13px; color: var(--doux); min-width: 150px; }
-#prompteur .etiquette { display: block; font-size: 13px; letter-spacing: 0.14em; color: var(--corail); font-weight: 800; margin-bottom: 6px; }
+#prompteur .etiquette { display: block; font-size: 11px; letter-spacing: 0.14em; color: var(--corail); font-weight: 800; margin-bottom: 6px; }
 #scene { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 10px; position: relative; }
 #toile { max-width: 100%; max-height: 100%; aspect-ratio: 16 / 9; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); background: #111325; }
 #rec { position: absolute; top: 18px; right: 22px; display: none; gap: 8px; align-items: center; background: rgba(0,0,0,0.6); padding: 6px 12px; border-radius: 999px; font-variant-numeric: tabular-nums; }
@@ -96,7 +104,14 @@ input[type="range"] { accent-color: var(--corail); }
 
 <!-- 2. Studio -->
 <section class="ecran" id="ecran-studio" aria-label="Studio">
-  <div id="prompteur" aria-live="polite"></div>
+  <div id="cadre">
+    <div id="poignee" title="Glisse pour déplacer, tire le coin en bas à droite pour agrandir">
+      <span>⠿ Ton texte · visible par toi seul</span>
+      <button id="moins-texte" type="button" aria-label="Texte plus petit">A−</button>
+      <button id="plus-texte" type="button" aria-label="Texte plus grand">A+</button>
+    </div>
+    <div id="prompteur" aria-live="polite"></div>
+  </div>
   <div id="scene">
     <canvas id="toile" width="1920" height="1080"></canvas>
     <div id="rec">00:00</div>
@@ -278,7 +293,7 @@ function boucle() {
 function majDiapo() {
   $("num").textContent = `${i + 1} / ${diapos.length}`;
   const p = $("prompteur"); p.innerHTML = "";
-  const e = document.createElement("span"); e.className = "etiquette"; e.textContent = `DIAPO ${i + 1} · TON TEXTE (visible par toi seul)`;
+  const e = document.createElement("span"); e.className = "etiquette"; e.textContent = `DIAPO ${i + 1} / ${diapos.length}`;
   const t = document.createElement("div");
   const texte = diapos[i] && diapos[i].notes ? diapos[i].notes : "Pas de texte pour cette diapo : parle librement.";
   mots = [];
@@ -306,7 +321,7 @@ function defilerTexte() {
   } else if (mode === "voix" && reco && mots.length) {
     // le mot que tu viens de lire reste au tiers du cadre ; on y glisse en douceur
     const m = mots[Math.min(curseur, mots.length - 1)].el;
-    cible = Math.max(0, m.offsetTop - p.offsetTop - p.clientHeight * 0.33);
+    cible = Math.max(0, p.scrollTop + m.getBoundingClientRect().top - p.getBoundingClientRect().top - p.clientHeight * 0.33);
     posTexte += (cible - posTexte) * Math.min(1, dt * 4); p.scrollTop = posTexte;
   }
 }
@@ -386,6 +401,39 @@ document.querySelectorAll("[data-coin]").forEach((b) => b.addEventListener("clic
   coin = b.dataset.coin; document.querySelectorAll("[data-coin]").forEach((x) => x.setAttribute("aria-pressed", x === b));
 }));
 $("taille").addEventListener("click", () => { taille = (taille + 1) % 3; $("taille").textContent = "Taille " + ["S", "M", "L"][taille]; });
+
+/* ---------- Petit cadre de lecture : déplacer, agrandir, taille du texte (mémorisés) ---------- */
+const CLE_CADRE = "studio-cadre-v1";
+const cadre = $("cadre");
+let reglageCadre = {};
+try { reglageCadre = JSON.parse(localStorage.getItem(CLE_CADRE)) || {}; } catch (e) {}
+function appliquerCadre() {
+  if (reglageCadre.x !== undefined) { cadre.style.left = reglageCadre.x + "px"; cadre.style.top = reglageCadre.y + "px"; cadre.style.translate = "none"; }
+  if (reglageCadre.w) { cadre.style.width = reglageCadre.w + "px"; cadre.style.height = reglageCadre.h + "px"; }
+  cadre.style.setProperty("--taille-texte", (reglageCadre.t || 22) + "px");
+}
+const sauverCadre = () => { try { localStorage.setItem(CLE_CADRE, JSON.stringify(reglageCadre)); } catch (e) {} };
+appliquerCadre();
+let glisse = null;
+$("poignee").addEventListener("pointerdown", (e) => {
+  if (e.target.closest("button")) return;
+  const r = cadre.getBoundingClientRect(); glisse = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+  $("poignee").setPointerCapture(e.pointerId);
+});
+$("poignee").addEventListener("pointermove", (e) => {
+  if (!glisse) return;
+  reglageCadre.x = Math.max(0, Math.min(innerWidth - 80, e.clientX - glisse.dx));
+  reglageCadre.y = Math.max(0, Math.min(innerHeight - 40, e.clientY - glisse.dy));
+  appliquerCadre();
+});
+$("poignee").addEventListener("pointerup", () => { if (glisse) { glisse = null; sauverCadre(); } });
+new ResizeObserver(() => {
+  if (!cadre.offsetWidth) return;
+  reglageCadre.w = cadre.offsetWidth; reglageCadre.h = cadre.offsetHeight; sauverCadre();
+}).observe(cadre);
+const tailleTexte = (d) => { reglageCadre.t = Math.max(14, Math.min(44, (reglageCadre.t || 22) + d)); appliquerCadre(); sauverCadre(); };
+$("moins-texte").addEventListener("click", () => tailleTexte(-2));
+$("plus-texte").addEventListener("click", () => tailleTexte(2));
 
 /* ---------- Enregistrement ---------- */
 let rec = null, morceaux = [], debut = 0, minuteur = 0, compte = 0, resultat = null;
