@@ -85,6 +85,7 @@ input[type="range"] { accent-color: var(--corail); }
     <div><b>1. Ce que tu montres</b></div>
     <div class="choix" role="radiogroup" aria-label="Ce que tu montres">
       <label><input type="radio" name="source" value="vsp" checked><b>Diapos VSP</b><span class="infos">Les 14 diapos prêtes, avec leur texte de prompteur.</span></label>
+      <label><input type="radio" name="source" value="setting"><b>Le setting en 15 min (YouTube)</b><span class="infos">Les 14 diapos de la vidéo explicative, avec leur texte de prompteur.</span></label>
       <label><input type="radio" name="source" value="images"><b>Mes images</b><span class="infos">Tes propres diapos exportées en PNG ou JPG (Keynote › Exporter › Images).</span></label>
       <label><input type="radio" name="source" value="ecran"><b>Mon écran</b><span class="infos">Partage une fenêtre ou ton écran (Keynote, un site…).</span></label>
     </div>
@@ -205,11 +206,12 @@ async function ouvrir() {
   $("toile").width = W; $("toile").height = H;
   try {
     diapos = [];
-    if (source === "vsp") {
+    if (source === "vsp" || source === "setting") {
+      const dossier = source === "vsp" ? "vsp-diapos" : "setting-diapos";
       let notes = [];
-      try { notes = await (await fetch("vsp-diapos/notes.json")).json(); } catch (e) {}
+      try { notes = await (await fetch(`${dossier}/notes.json`, { cache: "no-cache" })).json(); } catch (e) {}
       const total = notes.length || 14;
-      for (let n = 1; n <= total; n++) diapos.push({ img: await chargerImage(`vsp-diapos/${String(n).padStart(2, "0")}.png`), notes: notes[n - 1] || "" });
+      for (let n = 1; n <= total; n++) diapos.push({ img: await chargerImage(`${dossier}/${String(n).padStart(2, "0")}.png`), notes: notes[n - 1] || "" });
     } else if (source === "images") {
       const fs = [...$("fichiers").files].sort((a, b) => a.name.localeCompare(b.name, "fr", { numeric: true }));
       if (!fs.length) return erreur("Choisis d'abord tes images (tu peux en sélectionner plusieurs d'un coup).");
