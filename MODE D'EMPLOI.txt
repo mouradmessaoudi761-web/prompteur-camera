@@ -22,7 +22,12 @@ Fais un clic droit sur index.html › Ouvrir avec › Google Chrome.
 Astuces : téléphone à hauteur des yeux, face à une fenêtre. Mets « Hauteur du texte » assez bas pour que tes yeux restent près de l'objectif.
 Tes scripts restent enregistrés sur l'appareil où tu les colles.
 
-=== VIDÉO YOUTUBE « LE SETTING EN 15 MINUTES » ===
-Sur Mac (studio.html) : à l'étape « 1. Ce que tu montres », choisis « Le setting en 15 min (YouTube) ».
-Les 14 diapos s'affichent avec leur texte de prompteur, comme pour la VSP.
-Sur iPhone (index.html) : le script est aussi dans la liste, découpé en 5 prises (« YouTube setting 1/5 » à « 5/5 »).
+=== VIDÉO YOUTUBE « C'EST QUOI LE SETTING ? » ===
+Sur Mac (studio.html) : à l'étape « 1. Ce que tu montres », choisis « C'est quoi le setting ? (YouTube) ».
+Les 14 diapos s'affichent avec leurs checkpoints, comme pour la VSP.
+Sur iPhone (index.html) : les checkpoints sont aussi dans la liste, en 5 prises (« YouTube setting 1/5 » à « 5/5 »).
+
+=== CHECKPOINTS, PAS DE TEXTE À LIRE (mise à jour du 19 nov. 2026) ===
+Le prompteur affiche maintenant des checkpoints et quelques phrases-repères, plus un texte complet.
+Tu jettes un œil au checkpoint et tu parles avec tes mots, comme à un pote. Si tu bloques, tu recommences la phrase.
+Les phrases entre « » viennent de tes propres vidéos : tu peux les dire telles quelles.
