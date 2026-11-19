@@ -41,6 +41,59 @@ SCRIPTS_VSP.push(
 → Action : vision board + feuille de route
 → « On y va ensemble. Je t'attends au premier call. »` },
 
+{ id: "fmental", version: 1, titre: "Formation · Éveil · Le bon mental", texte:
+`① LE BON MENTAL
+→ Ce qui se passe dans ta tête compte autant que tes scripts
+→ Le but de cette vidéo : te rassurer
+
+② LES 3 PILIERS
+→ Régularité : un peu chaque jour
+→ Résilience : les refus font partie du métier
+→ Curiosité : t'intéresser vraiment à la personne
+→ La curiosité, c'est ce qui m'a le plus aidé
+
+③ LA RÉGULARITÉ AVANT LE TALENT
+→ 1 h par jour > 7 h le dimanche
+→ Personne ne naît setter, on le devient en pratiquant
+→ « La régularité bat le talent. »
+
+④ UN NON OU UN VU
+→ « Un non ou un vu, c'est pas un échec. C'est une information. »
+→ Pas le bon moment, pas le bon profil, ou message à améliorer
+→ Le prends pas perso
+→ Moi au début, j'en ai pris plein
+
+⑤ LE SYNDROME DE L'IMPOSTEUR
+→ Au début, tout le monde l'a. Moi aussi
+→ T'as pas besoin d'être expert
+→ Sois honnête : tu débutes, t'as une méthode, t'es accompagné
+
+⑥ LES RÈGLES D'OR
+→ Aider avant de vendre
+→ Écouter plus que parler
+→ Ne jamais forcer
+→ Suivre tes chiffres
+→ Continuer à te former (moi aussi j'ai un mentor)
+
+⑦ TON ENVIRONNEMENT
+→ Un endroit calme
+→ Téléphone et ordi prêts
+→ Notifications coupées
+→ Tableau de suivi ouvert
+
+⑧ TA ROUTINE
+→ Matin : nouvelles conversations
+→ Midi : réponses et qualification
+→ Après-midi : relances
+→ Soir : tableau à jour
+→ 1 à 2 h par jour, sessions de 30-50 min
+
+⑨ À RETENIR
+→ La régularité bat le talent
+→ Le refus fait partie du métier
+→ Exercice : bloque tes créneaux dans ton agenda
+→ « Prochaine vidéo : le setting et le closing, c'est quoi. »` },
+
 { id: "f01", version: 1, titre: "Formation 01 · Le setting et le closing, c'est quoi ?", texte:
 `① TITRE
 → « Avant de prospecter qui que ce soit, comprends le métier que tu vas faire. »
@@ -80,54 +133,6 @@ SCRIPTS_VSP.push(
 ⑨ LA SUITE
 → Exercice : repère 3 coachs qui vendent en appel
 → « Prochaine vidéo : la posture qui fait réussir. »` },
-
-{ id: "f02", version: 1, titre: "Formation 02 · La posture qui fait réussir", texte:
-`① TITRE
-→ « Les meilleurs scripts ne servent à rien sans la bonne posture. »
-
-② LE PROGRAMME
-→ 3 piliers, règles d'or, gérer les non, ta routine
-
-③ LES 3 PILIERS
-→ Régularité : 1 h par jour > 7 h le dimanche
-→ Résilience : les refus font partie du métier
-→ Curiosité : t'intéresser vraiment à la personne
-→ La curiosité, c'est ce qui m'a le plus aidé
-
-④ LES RÈGLES D'OR
-→ Aider avant de vendre
-→ Écouter plus que parler : celui qui pose les questions dirige
-→ Ne jamais forcer une décision
-→ Suivre tes chiffres chaque jour
-→ Continuer à te former (moi aussi j'ai un mentor)
-
-⑤ LES « NON »
-→ « Un non n'est pas un échec. C'est une information. »
-→ Pas le bon moment, pas qualifié, ou message à améliorer
-→ Le prends pas perso
-→ Chaque non te rapproche du prochain oui
-
-⑥ TON ENVIRONNEMENT
-→ Un endroit calme
-→ Téléphone et ordi prêts
-→ Notifications coupées pendant tes sessions
-→ Ton tableau de suivi ouvert
-
-⑦ UNE JOURNÉE TYPE
-→ Matin : nouvelles conversations
-→ Midi : réponses et qualification
-→ Après-midi : relances
-→ Soir : tableau à jour
-→ Possible en 1 à 2 h par jour, sessions de 30-50 min
-
-⑧ À RETENIR
-→ La régularité bat le talent
-→ Le refus fait partie du métier
-→ Routine simple, endroit calme
-
-⑨ LA SUITE
-→ Exercice : bloque tes créneaux de setting dans ton agenda
-→ « Prochaine vidéo : comment fonctionne la prospection. »` },
 
 { id: "f03", version: 1, titre: "Formation 03 · Comment fonctionne la prospection", texte:
 `① TITRE
