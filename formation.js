@@ -41,39 +41,36 @@ SCRIPTS_VSP.push(
 → Action : vision board + feuille de route
 → « On y va ensemble. Je t'attends au premier call. »` },
 
-{ id: "fmental", version: 1, titre: "Formation · Éveil · Le bon mental", texte:
+{ id: "fmental", version: 2, titre: "Formation · Éveil · Le bon mental", texte:
 `① LE BON MENTAL
 → Ce qui se passe dans ta tête compte autant que tes scripts
 → Le but de cette vidéo : te rassurer
 
-② LES 3 PILIERS
-→ Régularité : un peu chaque jour
-→ Résilience : les refus font partie du métier
-→ Curiosité : t'intéresser vraiment à la personne
-→ La curiosité, c'est ce qui m'a le plus aidé
-
-③ LA RÉGULARITÉ AVANT LE TALENT
+② LA RÉGULARITÉ AVANT LE TALENT
 → 1 h par jour > 7 h le dimanche
 → Personne ne naît setter, on le devient en pratiquant
 → « La régularité bat le talent. »
 
-④ UN NON OU UN VU
+③ LA RÉSILIENCE
+→ Des gens vont pas répondre, d'autres vont dire non
+→ C'est normal, ça fait partie du métier
+→ Tu apprends de chaque refus et tu continues
+
+④ LA CURIOSITÉ
+→ T'intéresser vraiment à la personne : sa vie, sa situation
+→ Pas pour cocher une case
+→ C'est ce qui m'a le plus aidé : les gens le sentent
+
+⑤ UN NON OU UN VU
 → « Un non ou un vu, c'est pas un échec. C'est une information. »
 → Pas le bon moment, pas le bon profil, ou message à améliorer
 → Le prends pas perso
 → Moi au début, j'en ai pris plein
 
-⑤ LE SYNDROME DE L'IMPOSTEUR
+⑥ LE SYNDROME DE L'IMPOSTEUR
 → Au début, tout le monde l'a. Moi aussi
 → T'as pas besoin d'être expert
 → Sois honnête : tu débutes, t'as une méthode, t'es accompagné
-
-⑥ LES RÈGLES D'OR
-→ Aider avant de vendre
-→ Écouter plus que parler
-→ Ne jamais forcer
-→ Suivre tes chiffres
-→ Continuer à te former (moi aussi j'ai un mentor)
 
 ⑦ TON ENVIRONNEMENT
 → Un endroit calme
