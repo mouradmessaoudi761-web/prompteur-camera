@@ -86,6 +86,9 @@ input[type="range"] { accent-color: var(--corail); }
     <div class="choix" role="radiogroup" aria-label="Ce que tu montres">
       <label><input type="radio" name="source" value="vsp" checked><b>Diapos VSP</b><span class="infos">Les 14 diapos prêtes, avec leur texte de prompteur.</span></label>
       <label><input type="radio" name="source" value="setting"><b>C'est quoi le setting ? (YouTube)</b><span class="infos">Les 14 diapos de la vidéo explicative, avec leurs checkpoints.</span></label>
+      <label><input type="radio" name="source" value="formation-01"><b>Formation 01 · Le setting et le closing, c'est quoi ?</b><span class="infos">Les 9 diapos, avec leurs checkpoints.</span></label>
+      <label><input type="radio" name="source" value="formation-02"><b>Formation 02 · La posture qui fait réussir</b><span class="infos">Les 9 diapos, avec leurs checkpoints.</span></label>
+      <label><input type="radio" name="source" value="formation-03"><b>Formation 03 · Comment fonctionne la prospection</b><span class="infos">Les 9 diapos, avec leurs checkpoints.</span></label>
       <label><input type="radio" name="source" value="images"><b>Mes images</b><span class="infos">Tes propres diapos exportées en PNG ou JPG (Keynote › Exporter › Images).</span></label>
       <label><input type="radio" name="source" value="ecran"><b>Mon écran</b><span class="infos">Partage une fenêtre ou ton écran (Keynote, un site…).</span></label>
     </div>
@@ -206,8 +209,8 @@ async function ouvrir() {
   $("toile").width = W; $("toile").height = H;
   try {
     diapos = [];
-    if (source === "vsp" || source === "setting") {
-      const dossier = source === "vsp" ? "vsp-diapos" : "setting-diapos";
+    if (source === "vsp" || source === "setting" || source.startsWith("formation-")) {
+      const dossier = source === "vsp" ? "vsp-diapos" : source === "setting" ? "setting-diapos" : source;
       let notes = [];
       try { notes = await (await fetch(`${dossier}/notes.json`, { cache: "no-cache" })).json(); } catch (e) {}
       const total = notes.length || 14;
