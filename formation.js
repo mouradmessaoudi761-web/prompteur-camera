@@ -41,7 +41,7 @@ SCRIPTS_VSP.push(
 → Action : vision board + feuille de route
 → « On y va ensemble. Je t'attends au premier call. »` },
 
-{ id: "fmental", version: 2, titre: "Formation · Éveil · Le bon mental", texte:
+{ id: "fmental", version: 5, titre: "Formation · Éveil · Le bon mental", texte:
 `① LE BON MENTAL
 → Ce qui se passe dans ta tête compte autant que tes scripts
 → Le but de cette vidéo : te rassurer
@@ -61,33 +61,18 @@ SCRIPTS_VSP.push(
 → Pas pour cocher une case
 → C'est ce qui m'a le plus aidé : les gens le sentent
 
-⑤ UN NON OU UN VU
-→ « Un non ou un vu, c'est pas un échec. C'est une information. »
-→ Pas le bon moment, pas le bon profil, ou message à améliorer
-→ Le prends pas perso
-→ Moi au début, j'en ai pris plein
-
-⑥ LE SYNDROME DE L'IMPOSTEUR
-→ Au début, tout le monde l'a. Moi aussi
-→ T'as pas besoin d'être expert
-→ Sois honnête : tu débutes, t'as une méthode, t'es accompagné
-
-⑦ TON ENVIRONNEMENT
+⑤ TON ENVIRONNEMENT
 → Un endroit calme
 → Téléphone et ordi prêts
 → Notifications coupées
 → Tableau de suivi ouvert
 
-⑧ TA ROUTINE
-→ Matin : nouvelles conversations
-→ Midi : réponses et qualification
-→ Après-midi : relances
+⑥ TA ROUTINE
+→ Créer une routine : être en condition chaque jour
+→ Matin : une vidéo YouTube qui te motive, te détendre, douche froide
+→ Un agenda vraiment propre, avec tes créneaux de setting bloqués
+→ La salle de sport pour ceux qui y vont : combler tes journées
 → Soir : tableau à jour
-→ 1 à 2 h par jour, sessions de 30-50 min
-
-⑨ À RETENIR
-→ La régularité bat le talent
-→ Le refus fait partie du métier
 → Exercice : bloque tes créneaux dans ton agenda
 → « Prochaine vidéo : le setting et le closing, c'est quoi. »` },
 
