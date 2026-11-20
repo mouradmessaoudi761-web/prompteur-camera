@@ -41,33 +41,28 @@ SCRIPTS_VSP.push(
 → Action : vision board + feuille de route
 → « On y va ensemble. Je t'attends au premier call. »` },
 
-{ id: "fmental", version: 5, titre: "Formation · Éveil · Le bon mental", texte:
+{ id: "fmental", version: 6, titre: "Formation · Éveil · Le bon mental", texte:
 `① LE BON MENTAL
 → Ce qui se passe dans ta tête compte autant que tes scripts
 → Le but de cette vidéo : te rassurer
 
-② LA RÉGULARITÉ AVANT LE TALENT
-→ 1 h par jour > 7 h le dimanche
-→ Personne ne naît setter, on le devient en pratiquant
-→ « La régularité bat le talent. »
+② TON POURQUOI
+→ Pourquoi tu fais ce métier : complément de revenu, quitter ton job, plus de liberté
+→ Écris-le, garde-le sous tes yeux
+→ C'est ça qui te fait continuer quand personne répond
 
-③ LA RÉSILIENCE
-→ Des gens vont pas répondre, d'autres vont dire non
-→ C'est normal, ça fait partie du métier
-→ Tu apprends de chaque refus et tu continues
+③ PASSER À L'ACTION AVANT D'ÊTRE PRÊT
+→ T'es jamais prêt à 100 %
+→ Ton premier message sera maladroit, c'est normal
+→ Tu progresses en envoyant, pas en relisant tes notes
 
-④ LA CURIOSITÉ
-→ T'intéresser vraiment à la personne : sa vie, sa situation
-→ Pas pour cocher une case
-→ C'est ce qui m'a le plus aidé : les gens le sentent
-
-⑤ TON ENVIRONNEMENT
+④ TON ENVIRONNEMENT
 → Un endroit calme
 → Téléphone et ordi prêts
 → Notifications coupées
 → Tableau de suivi ouvert
 
-⑥ TA ROUTINE
+⑤ TA ROUTINE
 → Créer une routine : être en condition chaque jour
 → Matin : une vidéo YouTube qui te motive, te détendre, douche froide
 → Un agenda vraiment propre, avec tes créneaux de setting bloqués
