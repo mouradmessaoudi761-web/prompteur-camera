@@ -113,7 +113,7 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
   <button class="bouton principal" id="ouvrir" type="button">🎥 Ouvrir la caméra</button>
   <button class="bouton secondaire" id="voir-prises" type="button">📁 Mes prises</button>
   <a class="bouton secondaire" href="studio.html" style="text-align:center;text-decoration:none">💻 Studio diapos + caméra (sur Mac)</a>
-  <div class="version">Version du 22 nov. · 15h30 (voix corrigée)</div>
+  <div class="version">Version du 22 nov. · 15h40 (voix corrigée v3)</div>
 </section>
 
 <!-- 2. Se filmer en lisant -->
@@ -240,6 +240,7 @@ const lib = { vitesse: (v) => v, taille: (v) => v + " px", bande: (v) => v + " %
 /* ---------- Caméra ---------- */
 let flux = null;
 async function ouvrirCamera() {
+  reveilAudio();
   $("erreur").style.display = "none";
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     return erreur("Ce navigateur ne donne pas accès à la caméra ici. Ouvre la page avec un lien https (voir le mode d'emploi), dans Safari sur iPhone ou Chrome sur Mac.");
@@ -259,7 +260,7 @@ async function ouvrirCamera() {
   preparerTexte(); ecran("ecran-tournage");
 }
 /* ---------- Détection de la voix : le texte avance quand tu parles, s'arrête quand tu te tais ---------- */
-let ac = null, srcAudio = null, analyseur = null, donnees = null, niveauFond = 0.004, derniereParole = 0, muetDepuis = 0;
+let ac = null, srcAudio = null, analyseur = null, donnees = null, derniereParole = 0, muetDepuis = 0;
 function preparerAnalyse() {
   try {
     // un seul contexte audio pour toute la séance : l'iPhone en limite le nombre
@@ -272,8 +273,9 @@ function preparerAnalyse() {
   } catch (e) { analyseur = null; }
   remiseAZeroVoix();
 }
-let pic = 0.02, dejaEntendu = false, debutPrise = 0;
-function remiseAZeroVoix() { niveauFond = 0.002; pic = 0.02; dejaEntendu = false; debutPrise = performance.now(); derniereParole = performance.now(); muetDepuis = 0; if (ac && ac.state !== "running") ac.resume(); }
+let histo = [], dejaEntendu = false, debutPrise = 0;
+function remiseAZeroVoix() { histo = []; dejaEntendu = false; debutPrise = performance.now(); derniereParole = performance.now(); muetDepuis = 0; reveilAudio(); }
+function reveilAudio() { try { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); if (ac.state !== "running") ac.resume(); } catch (e) {} }
 function voyant(etat, niveau) {
   const v = $("voyant"); if (!v) return;
   v.dataset.etat = etat; $("niveau").style.width = Math.min(100, Math.round((niveau || 0) * 900)) + "%";
@@ -285,14 +287,14 @@ function parle() {
   analyseur.getFloatTimeDomainData(donnees);
   let s = 0; for (const x of donnees) s += x * x; const rms = Math.sqrt(s / donnees.length);
   const now = performance.now();
-  // micro qui ne renvoie plus rien (coupé par l'iPhone) : on défile au lieu de bloquer
   if (rms < 1e-6) { if (!muetDepuis) muetDepuis = now; if (now - muetDepuis > 1500) { voyant("auto", 0); return true; } } else muetDepuis = 0;
-  pic = Math.max(rms, pic * 0.9995);                       // ton niveau de voix, appris en continu
-  const seuil = Math.max(0.003, niveauFond * 2.5, pic * 0.18);
+  // bruit de fond = les 20 % les plus calmes des 4 dernières secondes : il suit les changements de micro de l'iPhone dans les deux sens
+  histo.push(rms); if (histo.length > 240) histo.shift();
+  const tri = histo.slice().sort((x, y) => x - y);
+  const fond = Math.min(0.006, tri[Math.floor(tri.length * 0.2)] || 0);
+  const seuil = Math.max(0.0025, fond * 3);
   if (rms > seuil) { derniereParole = now; dejaEntendu = true; }
-  else niveauFond = Math.min(0.01, niveauFond * 0.98 + rms * 0.02); // bruit de fond appris dans les silences, plafonné
-  // jamais entendu après 3 s de prise : le micro ne capte pas, on défile en continu
-  if (!dejaEntendu && now - debutPrise > 3000) { voyant("auto", rms); return true; }
+  if (!dejaEntendu && now - debutPrise > 3000) { voyant("auto", rms); return true; } // rien capté après 3 s : défilement continu
   const p = now - derniereParole < 500;
   voyant(p ? "parle" : "attente", rms);
   return p;
@@ -380,6 +382,7 @@ function finRec() {
   enregistrerPrise(video).then(majCompteur).catch(() => {});
 }
 $("enregistrer").addEventListener("click", () => {
+  reveilAudio();
   if (compte) return;
   if (rec && rec.state === "recording") arreterRec(); else demarrerAvecDecompte();
 });
