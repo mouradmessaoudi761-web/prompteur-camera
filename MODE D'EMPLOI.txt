@@ -2,36 +2,37 @@ PROMPTEUR CAMÉRA MESSACADEMY
 Tu te filmes et ton texte défile en haut de l'écran, près de la caméra.
 Le texte n'apparaît PAS dans la vidéo enregistrée.
 
-=== SUR TON iPHONE (une seule fois, 5 minutes) ===
-La caméra du téléphone ne s'ouvre que depuis un lien sécurisé (https). On met donc la page en ligne gratuitement :
+=== 1. INSTALLER (une seule fois) ===
+iPhone : la caméra ne s'ouvre que depuis un lien sécurisé (https).
 1. Sur ton Mac, va sur  app.netlify.com/drop  et crée un compte gratuit.
-2. Glisse le DOSSIER « prompteur-camera » dans la zone indiquée sur la page.
+2. Glisse le DOSSIER « prompteur-camera » dans la zone indiquée.
 3. Netlify te donne un lien (https://...netlify.app). Envoie-le sur ton iPhone.
-4. Ouvre-le dans Safari, puis Partager › « Sur l'écran d'accueil » : tu as une icône comme une appli.
+4. Ouvre-le dans Safari, puis Partager › « Sur l'écran d'accueil ».
+Mac : clic droit sur index.html › Ouvrir avec › Google Chrome.
 
-=== SUR TON MAC (sans rien mettre en ligne) ===
-Fais un clic droit sur index.html › Ouvrir avec › Google Chrome.
+=== 2. CE QU'IL Y A DANS LA LISTE (iPhone, index.html) ===
+La liste est rangée par catégorie :
+- Réels Instagram : « Hook Instagram · … » (face caméra)
+- VSP · Avant notre appel : 6 prises
+- YouTube · C'est quoi le setting ? : 5 prises
+- Formation : 00 Bienvenue, Éveil · Le bon mental, 01, 02, 03
+- Mes scripts : ceux que tu crées avec « Nouveau script »
+Les anciennes cases vides « Vidéo 01 à 09 » ont été retirées (c'étaient des doublons des formations).
 
-=== POUR TOURNER ===
-1. Choisis la vidéo, colle ton script, règle la vitesse et la taille.
+=== 3. CHECKPOINTS, PAS DE TEXTE À LIRE ===
+Tu jettes un œil au checkpoint et tu parles avec tes mots, comme à un pote.
+Les phrases entre « » viennent de toi : tu peux les dire telles quelles. Si tu bloques, tu recommences la phrase.
+
+=== 4. TOURNER FACE CAMÉRA (iPhone) ===
+1. Choisis le script, règle la vitesse et la taille.
 2. « Ouvrir la caméra » et autorise la caméra et le micro.
 3. Gros bouton rouge : décompte 3-2-1, puis l'enregistrement et le défilement démarrent ensemble.
-4. Touche l'écran pour mettre le texte en pause. Glisse du doigt pour revenir en arrière. Les boutons − et + changent la vitesse.
-5. Bouton rouge pour arrêter, puis « Enregistrer la vidéo » › « Enregistrer la vidéo » (elle va dans Photos).
+4. Touche l'écran pour mettre en pause. Glisse du doigt pour revenir en arrière. − et + changent la vitesse.
+5. Bouton rouge pour arrêter, puis « Enregistrer la vidéo » (elle va dans Photos).
+Astuces : téléphone à hauteur des yeux, face à une fenêtre. « Hauteur du texte » assez bas pour garder les yeux près de l'objectif.
 
-Astuces : téléphone à hauteur des yeux, face à une fenêtre. Mets « Hauteur du texte » assez bas pour que tes yeux restent près de l'objectif.
-Tes scripts restent enregistrés sur l'appareil où tu les colles.
+=== 5. TOURNER AVEC DIAPOS (Mac, studio.html) ===
+À l'étape « 1. Ce que tu montres », choisis : Diapos VSP, C'est quoi le setting ? (YouTube), Formation 00, Le bon mental, Formation 01, 02 ou 03.
+Les diapos s'affichent avec les mêmes checkpoints que sur l'iPhone.
 
-=== VIDÉO YOUTUBE « C'EST QUOI LE SETTING ? » ===
-Sur Mac (studio.html) : à l'étape « 1. Ce que tu montres », choisis « C'est quoi le setting ? (YouTube) ».
-Les 14 diapos s'affichent avec leurs checkpoints, comme pour la VSP.
-Sur iPhone (index.html) : les checkpoints sont aussi dans la liste, en 5 prises (« YouTube setting 1/5 » à « 5/5 »).
-
-=== CHECKPOINTS, PAS DE TEXTE À LIRE (mise à jour du 19 nov. 2026) ===
-Le prompteur affiche maintenant des checkpoints et quelques phrases-repères, plus un texte complet.
-Tu jettes un œil au checkpoint et tu parles avec tes mots, comme à un pote. Si tu bloques, tu recommences la phrase.
-Les phrases entre « » viennent de tes propres vidéos : tu peux les dire telles quelles.
-
-=== VIDÉOS DE FORMATION (mise à jour du 19 nov. 2026) ===
-Sur Mac (studio.html) : à l'étape « 1. Ce que tu montres », choisis « Formation 01 », « 02 » ou « 03 ». Les 9 diapos s'affichent avec leurs checkpoints.
-Sur iPhone (index.html) : dans la liste, « Formation 00 · Bienvenue » à « Formation 03 ». La 00 est face caméra, sans diapos.
+Tes scripts restent enregistrés sur l'appareil où tu les écris.

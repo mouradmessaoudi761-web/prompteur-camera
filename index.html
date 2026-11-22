@@ -154,20 +154,17 @@ input[type="range"] { accent-color: var(--corail); width: 100%; }
 <script src="vsp.js"></script>
 <script src="setting.js"></script>
 <script src="formation.js"></script>
+<script src="instagram.js"></script>
 <script>
 const $ = (id) => document.getElementById(id);
 const CLE = "messacademy-prompteur-camera-v1";
-const TITRES = ["Le setting et le closing, c'est quoi ?", "La posture qui fait réussir", "Comment fonctionne la prospection",
-  "La conversation qui mène au rendez-vous", "Les relances et les erreurs à éviter", "S'organiser comme un pro",
-  "Préparer et structurer un appel de vente", "Traiter les objections", "Ton plan d'action et la suite"];
 const EXEMPLE = "Salut, et bienvenue dans cette première vidéo de Messacademy.\n\nAujourd'hui, on part de la base : le setting et le closing, c'est quoi exactement ?\n\nLe setter, c'est la personne qui démarre la conversation, qui comprend le besoin, et qui cale le rendez-vous.\n\nLe closer, lui, mène l'appel de vente. Il aide la personne à prendre une décision claire.\n\nOn se retrouve dans la prochaine vidéo.";
 
 let etat;
 try { etat = JSON.parse(localStorage.getItem(CLE)); } catch (e) {}
-if (!etat) etat = {
-  scripts: TITRES.map((t, i) => ({ id: "v" + (i + 1), titre: `Vidéo ${String(i + 1).padStart(2, "0")} · ${t}`, texte: i === 0 ? EXEMPLE : "" })),
-  actif: "v1", r: { vitesse: 45, taille: 30, bande: 35 },
-};
+if (!etat) etat = { scripts: [], actif: "", r: { vitesse: 45, taille: 30, bande: 35 } };
+// retire les anciennes cases « Vidéo 01 à 09 » restées vides (doublons des vidéos de formation) ; garde celles où t'as écrit
+etat.scripts = etat.scripts.filter((x) => !(/^v\d+$/.test(x.id) && (!x.texte.trim() || x.texte === EXEMPLE)));
 // ajoute les scripts fournis (VSP…) s'ils ne sont pas déjà là, sans toucher à ce que tu as écrit
 // … et remplace une ancienne version d'un script fourni par la nouvelle (ex. VSP 6 réécrite)
 if (!etat.versions) etat.versions = {};
@@ -182,6 +179,13 @@ if (!etat.versions) etat.versions = {};
   else if ((sc.version || 1) > (etat.versions[sc.id] || 1)) { deja.titre = sc.titre; deja.texte = sc.texte; }
   etat.versions[sc.id] = sc.version || 1;
 });
+// range la liste par catégorie, dans l'ordre des fichiers ; tes propres scripts à la fin
+const GROUPES = [["ig", "Réels Instagram"], ["vsp", "VSP · Avant notre appel"], ["yt", "YouTube · C'est quoi le setting ?"], ["f", "Formation"]];
+const groupe = (id) => { const i = (typeof SCRIPTS_VSP !== "undefined" ? SCRIPTS_VSP : []).some((sc) => sc.id === id) ? GROUPES.findIndex(([p]) => id.startsWith(p)) : -1; return i < 0 ? GROUPES.length : i; };
+const ordre = (id) => { const i = (typeof SCRIPTS_VSP !== "undefined" ? SCRIPTS_VSP : []).findIndex((sc) => sc.id === id); return i < 0 ? 1e9 : i; };
+etat.scripts = etat.scripts.map((s, i) => [s, i]).sort((a, b) => groupe(a[0].id) - groupe(b[0].id) || ordre(a[0].id) - ordre(b[0].id) || a[1] - b[1]).map(([s]) => s);
+if (!etat.scripts.length) etat.scripts.push({ id: "s" + Date.now(), titre: "Nouveau script", texte: "" });
+if (!etat.scripts.some((s) => s.id === etat.actif)) etat.actif = etat.scripts[0].id;
 const sauver = () => { try { localStorage.setItem(CLE, JSON.stringify(etat)); } catch (e) {} };
 const courant = () => etat.scripts.find((s) => s.id === etat.actif) || etat.scripts[0];
 const R = etat.r;
@@ -197,7 +201,12 @@ const ecran = (id) => document.querySelectorAll(".ecran").forEach((e) => e.class
 /* ---------- Scripts ---------- */
 function remplir() {
   const c = $("choix"); c.innerHTML = "";
-  etat.scripts.forEach((s) => { const o = document.createElement("option"); o.value = s.id; o.textContent = s.titre + (s.texte.trim() ? "" : " (vide)"); c.appendChild(o); });
+  const blocs = {};
+  etat.scripts.forEach((s) => {
+    const g = groupe(s.id);
+    if (!blocs[g]) { blocs[g] = document.createElement("optgroup"); blocs[g].label = g < GROUPES.length ? GROUPES[g][1] : "Mes scripts"; c.appendChild(blocs[g]); }
+    const o = document.createElement("option"); o.value = s.id; o.textContent = s.titre + (s.texte.trim() ? "" : " (vide)"); blocs[g].appendChild(o);
+  });
   c.value = courant().id; $("titre").value = courant().titre; $("texte").value = courant().texte; infos();
 }
 function infos() {

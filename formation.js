@@ -111,6 +111,54 @@ SCRIPTS_VSP.push(
 → Exercice : repère 3 coachs qui vendent en appel
 → « Prochaine vidéo : la posture qui fait réussir. »` },
 
+{ id: "f02", version: 1, titre: "Formation 02 · La posture qui fait réussir", texte:
+`① TITRE
+→ « Les meilleurs scripts ne servent à rien sans la bonne posture. »
+
+② LE PROGRAMME
+→ 3 piliers, règles d'or, gérer les non, ta routine
+
+③ LES 3 PILIERS
+→ Régularité : 1 h par jour > 7 h le dimanche
+→ Résilience : les refus font partie du métier
+→ Curiosité : t'intéresser vraiment à la personne
+→ La curiosité, c'est ce qui m'a le plus aidé
+
+④ LES RÈGLES D'OR
+→ Aider avant de vendre
+→ Écouter plus que parler : celui qui pose les questions dirige
+→ Ne jamais forcer une décision
+→ Suivre tes chiffres chaque jour
+→ Continuer à te former (moi aussi j'ai un mentor)
+
+⑤ LES « NON »
+→ « Un non n'est pas un échec. C'est une information. »
+→ Pas le bon moment, pas qualifié, ou message à améliorer
+→ Le prends pas perso
+→ Chaque non te rapproche du prochain oui
+
+⑥ TON ENVIRONNEMENT
+→ Un endroit calme
+→ Téléphone et ordi prêts
+→ Notifications coupées pendant tes sessions
+→ Ton tableau de suivi ouvert
+
+⑦ UNE JOURNÉE TYPE
+→ Matin : nouvelles conversations
+→ Midi : réponses et qualification
+→ Après-midi : relances
+→ Soir : tableau à jour
+→ Possible en 1 à 2 h par jour, sessions de 30-50 min
+
+⑧ À RETENIR
+→ La régularité bat le talent
+→ Le refus fait partie du métier
+→ Routine simple, endroit calme
+
+⑨ LA SUITE
+→ Exercice : bloque tes créneaux de setting dans ton agenda
+→ « Prochaine vidéo : comment fonctionne la prospection. »` },
+
 { id: "f03", version: 1, titre: "Formation 03 · Comment fonctionne la prospection", texte:
 `① TITRE
 → On attaque la partie 2 : l'art du setting
