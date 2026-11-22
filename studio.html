@@ -336,22 +336,29 @@ function defilerTexte() {
 $("prompteur").addEventListener("wheel", () => { posTexte = $("prompteur").scrollTop; }, { passive: true });
 
 /* ---------- Détection de la voix (volume du micro) ---------- */
-let analyseur = null, donnees = null, niveauFond = 0.01, derniereParole = 0;
+let ac = null, srcAudio = null, analyseur = null, donnees = null, niveauFond = 0.004, derniereParole = 0, muetDepuis = 0;
 function preparerAnalyse() {
   try {
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const src = ac.createMediaStreamSource(micro); analyseur = ac.createAnalyser(); analyseur.fftSize = 1024;
-    src.connect(analyseur); donnees = new Float32Array(analyseur.fftSize);
+    if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); // un seul contexte audio
+    if (ac.state !== "running") ac.resume();
+    if (srcAudio) { try { srcAudio.disconnect(); } catch (e) {} }
+    srcAudio = ac.createMediaStreamSource(micro);
+    if (!analyseur) { analyseur = ac.createAnalyser(); analyseur.fftSize = 1024; donnees = new Float32Array(analyseur.fftSize); }
+    srcAudio.connect(analyseur);
   } catch (e) { analyseur = null; }
+  niveauFond = 0.004; derniereParole = performance.now(); muetDepuis = 0;
 }
 function parle() {
   if (!analyseur) return true;
+  if (ac && ac.state !== "running") { ac.resume(); return true; }
   analyseur.getFloatTimeDomainData(donnees);
   let s = 0; for (const x of donnees) s += x * x; const rms = Math.sqrt(s / donnees.length);
-  // bruit de fond qui s'adapte : descend vite vers les silences, remonte lentement
-  niveauFond = rms < niveauFond ? niveauFond * 0.9 + rms * 0.1 : niveauFond * 1.0005;
-  if (rms > Math.max(0.012, niveauFond * 3)) derniereParole = performance.now();
-  return performance.now() - derniereParole < 350; // continue 0,35 s après la fin d'un mot
+  const now = performance.now();
+  if (rms === 0) { if (!muetDepuis) muetDepuis = now; if (now - muetDepuis > 1500) return true; } else muetDepuis = 0;
+  const seuil = Math.min(0.03, Math.max(0.008, niveauFond * 2.5));
+  if (rms > seuil) derniereParole = now;
+  else niveauFond = Math.min(0.012, niveauFond * 0.98 + rms * 0.02); // bruit de fond appris dans les silences, plafonné
+  return now - derniereParole < 450;
 }
 
 /* ---------- Reconnaissance de la parole : le texte suit ce que tu lis ---------- */

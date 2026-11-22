@@ -250,21 +250,32 @@ async function ouvrirCamera() {
   preparerTexte(); ecran("ecran-tournage");
 }
 /* ---------- Détection de la voix : le texte avance quand tu parles, s'arrête quand tu te tais ---------- */
-let analyseur = null, donnees = null, niveauFond = 0.01, derniereParole = 0;
+let ac = null, srcAudio = null, analyseur = null, donnees = null, niveauFond = 0.004, derniereParole = 0, muetDepuis = 0;
 function preparerAnalyse() {
   try {
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const src = ac.createMediaStreamSource(flux); analyseur = ac.createAnalyser(); analyseur.fftSize = 1024;
-    src.connect(analyseur); donnees = new Float32Array(analyseur.fftSize);
+    // un seul contexte audio pour toute la séance : l'iPhone en limite le nombre
+    if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)();
+    if (ac.state !== "running") ac.resume();
+    if (srcAudio) { try { srcAudio.disconnect(); } catch (e) {} }
+    srcAudio = ac.createMediaStreamSource(flux);
+    if (!analyseur) { analyseur = ac.createAnalyser(); analyseur.fftSize = 1024; donnees = new Float32Array(analyseur.fftSize); }
+    srcAudio.connect(analyseur);
   } catch (e) { analyseur = null; }
+  remiseAZeroVoix();
 }
+function remiseAZeroVoix() { niveauFond = 0.004; derniereParole = performance.now(); muetDepuis = 0; if (ac && ac.state !== "running") ac.resume(); }
 function parle() {
   if (!analyseur || !R.suitVoix) return true;
+  if (ac && ac.state !== "running") { ac.resume(); return true; } // micro pas prêt : on défile quand même
   analyseur.getFloatTimeDomainData(donnees);
   let s = 0; for (const x of donnees) s += x * x; const rms = Math.sqrt(s / donnees.length);
-  niveauFond = rms < niveauFond ? niveauFond * 0.9 + rms * 0.1 : niveauFond * 1.0005;
-  if (rms > Math.max(0.012, niveauFond * 3)) derniereParole = performance.now();
-  return performance.now() - derniereParole < 350;
+  const now = performance.now();
+  // micro qui ne renvoie plus rien (coupé par l'iPhone) : on défile au lieu de bloquer
+  if (rms === 0) { if (!muetDepuis) muetDepuis = now; if (now - muetDepuis > 1500) return true; } else muetDepuis = 0;
+  const seuil = Math.min(0.03, Math.max(0.008, niveauFond * 2.5));
+  if (rms > seuil) derniereParole = now;
+  else niveauFond = Math.min(0.012, niveauFond * 0.98 + rms * 0.02); // le bruit de fond ne s'apprend que dans les silences, et reste plafonné
+  return now - derniereParole < 450;
 }
 function erreur(t) { const e = $("erreur"); e.textContent = t; e.style.display = "block"; }
 function fermerCamera() { if (flux) flux.getTracks().forEach((t) => t.stop()); flux = null; }
@@ -295,7 +306,7 @@ function boucle(t) {
   if (y >= max) { y = max; defileActif = false; }
   dessiner(); raf = requestAnimationFrame(boucle);
 }
-function lancerDefile() { if (defileActif) return; defileActif = true; dernier = 0; raf = requestAnimationFrame(boucle); }
+function lancerDefile() { if (defileActif) return; remiseAZeroVoix(); defileActif = true; dernier = 0; raf = requestAnimationFrame(boucle); }
 function pauseDefile() { defileActif = false; cancelAnimationFrame(raf); }
 $("zone-tap").addEventListener("click", () => (defileActif ? pauseDefile() : lancerDefile()));
 let tY = null;
