@@ -27,7 +27,7 @@ SCRIPTS_VSP.push(
 ⑤ CTA
 (Énergique, avance vers la caméra · pouce à la fin)
 → « Tu veux savoir comment commencer ? Écris-moi SETTING en DM. »` },
-{ id: "ig2", version: 1, titre: "Storytelling Instagram · D'au pair à setter", texte:
+{ id: "ig2", version: 2, titre: "Storytelling Instagram · D'au pair à setter (v2)", texte:
 `TITRE ÉCRAN : D'AU PAIR AUX USA À SETTER
 
 ① HOOK
@@ -35,26 +35,29 @@ SCRIPTS_VSP.push(
 → « Il y a pas longtemps, je gardais des enfants aux États-Unis. »
 → « Aujourd'hui, je suis setter. Je te raconte comment. »
 
-② AVANT
-(Léger, autodérision sur les cheveux jaunes)
-→ « Avant, j'enchaînais les petits boulots. La maçonnerie, les chantiers… j'avais même les cheveux jaunes à l'époque. »
-→ « Je bossais, je partais voyager, je revenais bosser. En boucle. »
+② PAUMÉ
+(Honnête, un peu d'autodérision · tu comptes sur tes doigts)
+→ « Avant, j'avais fait je sais pas combien de tafs. Franchement, j'étais paumé. »
+→ « La maçonnerie, les chantiers, j'ai ouvert plein de business, j'étais convoyeur, je ramenais des véhicules de gauche à droite. »
+→ « Je bossais, je partais voyager, je revenais. En boucle. »
 
 ③ LES ÉTATS-UNIS
-(Plus posé, tu revis le moment)
-→ « Après, je pars au pair. New York, puis Atlanta. »
-→ « Et je suis rentré en France plus tôt que prévu. Sans plan, sans boulot. »
+(Plus rapide, ça s'enchaîne · « bam » avec un geste)
+→ « Après, je pars au pair à New York. Je reste même pas deux mois dans la famille. Bam. »
+→ « Je bouge à Atlanta. Trois mois. »
+→ « Et je rentre en France plus tôt que prévu. Sans plan, sans boulot. »
 
 ④ LE DÉCLIC
-(Lent, sérieux · pause avant la phrase)
-→ « Là, je me suis dit : je veux plus que quelqu'un d'autre décide si je bosse ou pas. »
+(Lent, sérieux · pause avant)
+→ « Ça s'est pas du tout passé comme prévu. »
+→ « Et là, je me suis dit : je veux plus que quelqu'un d'autre décide si je bosse ou pas. »
 
-⑤ LE SETTING
-(Grand frère, tes mains expliquent)
-→ « C'est là que j'ai découvert le setting. Des coachs vendent sur Insta, ils ont trop de messages, donc toi tu discutes à leur place avec ceux qui sont vraiment intéressés, et tu leur bookes un appel. »
-→ « Je me suis formé, et aujourd'hui c'est mon métier. »
+⑤ LA BASCULE
+(Le sourire revient, tu te redresses)
+→ « C'est là que je découvre le setting. Je me forme, je m'accroche. »
+→ « Et aujourd'hui, c'est mon métier. Depuis mon téléphone. »
 
 ⑥ CTA
-(Énergique, avance vers la caméra)
-→ « Si toi aussi t'en as marre de ton taf, écris-moi SETTING en DM. »` }
+(Complice, avance vers la caméra)
+→ « Si toi aussi t'es un peu paumé en ce moment, écris-moi SETTING en DM. »` }
 );
