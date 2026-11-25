@@ -26,5 +26,35 @@ SCRIPTS_VSP.push(
 
 ⑤ CTA
 (Énergique, avance vers la caméra · pouce à la fin)
-→ « Tu veux savoir comment commencer ? Écris-moi SETTING en DM. »` }
+→ « Tu veux savoir comment commencer ? Écris-moi SETTING en DM. »` },
+{ id: "ig2", version: 1, titre: "Storytelling Instagram · D'au pair à setter", texte:
+`TITRE ÉCRAN : D'AU PAIR AUX USA À SETTER
+
+① HOOK
+(Calme, regard caméra · petit sourire)
+→ « Il y a pas longtemps, je gardais des enfants aux États-Unis. »
+→ « Aujourd'hui, je suis setter. Je te raconte comment. »
+
+② AVANT
+(Léger, autodérision sur les cheveux jaunes)
+→ « Avant, j'enchaînais les petits boulots. La maçonnerie, les chantiers… j'avais même les cheveux jaunes à l'époque. »
+→ « Je bossais, je partais voyager, je revenais bosser. En boucle. »
+
+③ LES ÉTATS-UNIS
+(Plus posé, tu revis le moment)
+→ « Après, je pars au pair. New York, puis Atlanta. »
+→ « Et je suis rentré en France plus tôt que prévu. Sans plan, sans boulot. »
+
+④ LE DÉCLIC
+(Lent, sérieux · pause avant la phrase)
+→ « Là, je me suis dit : je veux plus que quelqu'un d'autre décide si je bosse ou pas. »
+
+⑤ LE SETTING
+(Grand frère, tes mains expliquent)
+→ « C'est là que j'ai découvert le setting. Des coachs vendent sur Insta, ils ont trop de messages, donc toi tu discutes à leur place avec ceux qui sont vraiment intéressés, et tu leur bookes un appel. »
+→ « Je me suis formé, et aujourd'hui c'est mon métier. »
+
+⑥ CTA
+(Énergique, avance vers la caméra)
+→ « Si toi aussi t'en as marre de ton taf, écris-moi SETTING en DM. »` }
 );
